@@ -8,4 +8,4 @@ Story 4: As Abraham Ambassador, I would like to check a piece of equipment back 
 Story 5: As Alan Admin, I would like to add new pieces of equipment to the list of available equipment so that students have more options of what to check out.
 Story 6: As Silas Student, I would like to sign a usage and liability agreement before my first checkout so that there is proof that I know what the consequences are if I break or lose the equipment.
 Story 7: As Abraham Ambassador, I would like to send notifications for equipment that is due in 1 day, 0 days, or overdue so that it can be returned promptly for other students to use.
-not doable this semester but would be important once there is a group feature: As Leonardo CAD Leader, I would like to have the functionalities of stories 1, 2, and 6 for organizations so that I can check out enough equipment for my club to use at a meeting/workshop/whatever.
+(Optional Story 8): As Leonardo CAD Leader, I would like to have the functionalities of stories 1, 2, and 6 for organizations so that I can check out enough equipment for my club to use at a meeting/workshop/whatever.
