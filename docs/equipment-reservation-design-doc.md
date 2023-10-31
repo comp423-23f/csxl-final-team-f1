@@ -1,5 +1,3 @@
-# Hello
-
 #Stories
 
 Stories 1, 2 and 3 are tied for most importance, 4 and 5 are second most important, and 6 is least important that is still necessary for minimum viability. Story 7 is not necessary but would be good to complete if there is time.
