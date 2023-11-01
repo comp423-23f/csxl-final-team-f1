@@ -12,7 +12,7 @@ The Ambassador needs an interface to confirm reservation requests, confirm stude
 
 The Admin needs an interface to add new equipment to the list of reservable equipment. In the case that a piece of equipment needs repair/is broken, the Admin will also need a way to remove equipment from the list of reservable equipment in that interface.
 
-#Stories
+# Stories
 
 Stories 1, 2 and 3 are tied for most importance, 4 and 5 are second most important, and 6 is least important that is still necessary for minimum viability. Story 7 is not necessary but would be good to complete if there is time.
 
@@ -32,7 +32,8 @@ Story 7: As Abraham Ambassador, I would like to send notifications for equipment
 
 (Optional Story 8): As Leonardo CAD Leader, I would like to have the functionalities of stories 1, 2, and 6 for organizations so that I can check out enough equipment for my club to use at a meeting/workshop/whatever.
 
-#4 Wireframes/Mockups
+# Wireframes/Mockups
+
 Here is the link to my Figma table: https://www.figma.com/file/zJ77A1AsEg5nkFpFpa6gAf/XL-Coworking-Application-(Copy)?type=design&node-id=0%3A1&mode=design&t=UIr4rs8335pieLlM-1
 
 I made the views based of the 3 types of people; students, ambassadors, and admin.
