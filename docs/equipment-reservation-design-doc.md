@@ -1,3 +1,14 @@
+# Title
+
+Equivalent Exchange
+
+# Team Members
+
+Alan Dang - alan9213
+Bergen Dean - bddean21
+Jack Lotito - jacklot
+Nirmal Rajendran - nirmal
+
 # Overview:
 
 The XL has equipment, and will be getting more, that it would like to open up for students to reserve for varying lengths of time during the week or over the weekend.
