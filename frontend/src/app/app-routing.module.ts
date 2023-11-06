@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppTitleStrategy } from './app-title.strategy';
@@ -7,6 +8,7 @@ import { ProfileEditorComponent } from './profile/profile-editor/profile-editor.
 import { CoworkingPageComponent } from './coworking/coworking-home/coworking-home.component';
 import { AmbassadorPageComponent } from './coworking/ambassador-home/ambassador-home.component';
 import { AboutComponent } from './about/about.component';
+import { EquipmentPageComponent } from './equipment-reservation/equipment-page/equipment-page.component';
 
 const routes: Routes = [
   HomeComponent.Route,
@@ -15,6 +17,7 @@ const routes: Routes = [
   GateComponent.Route,
   CoworkingPageComponent.Route,
   AmbassadorPageComponent.Route,
+  EquipmentPageComponent.Route,
   {
     path: 'coworking',
     title: 'Cowork in the XL',
@@ -40,6 +43,14 @@ const routes: Routes = [
     title: 'Experimental',
     loadChildren: () =>
       import('./event/event.module').then((m) => m.EventModule)
+  },
+  {
+    path: 'equipment-reservation',
+    title: 'Equipment Reservation',
+    loadChildren: () =>
+      import(
+        './equipment-reservation/equipment-reservation.module'
+      ).then((m) => m.EquipmentReservationModule)
   }
 ];
 
@@ -53,4 +64,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AppTitleStrategy.Provider]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
