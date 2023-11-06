@@ -1,9 +1,10 @@
+/* eslint-disable prettier/prettier */
 import { Component } from '@angular/core';
-import { profileResolver } from '/workspace/frontend/src/app/profile/profile.resolver';
+// import { profileResolver } from '/workspace/frontend/src/app/profile/profile.resolver';
 //import { Organization } from '../organization.model';
 import { ActivatedRoute } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Profile } from '/workspace/frontend/src/app/profile/profile.service';
+// import { MatSnackBar } from '@angular/material/snack-bar';
+// import { Profile } from '/workspace/frontend/src/app/profile/profile.service';
 //import { organizationResolver } from '../organization.resolver';
 
 @Component({
@@ -26,21 +27,20 @@ export class EquipmentPageComponent {
   public searchBarQuery = '';
 
   /** Store the currently-logged-in user's profile.  */
-  public profile: Profile;
+  // public profile: Profile;
 
   /** Stores the user permission value for current organization. */
   public permValues: Map<number, number> = new Map();
 
   constructor(
-    private route: ActivatedRoute,
-    protected snackBar: MatSnackBar
+    private route: ActivatedRoute // protected snackBar: MatSnackBar
   ) {
     /** Initialize data from resolvers. */
     const data = this.route.snapshot.data as {
-      profile: Profile;
+      // profile: Profile;
       //organizations: Organization[];
     };
-    this.profile = data.profile;
+    // this.profile = data.profile;
     //this.organizations = data.organizations;
   }
 }

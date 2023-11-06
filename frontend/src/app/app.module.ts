@@ -39,8 +39,8 @@ import { AboutComponent } from './about/about.component';
 import { GateComponent } from './gate/gate.component';
 import { ProfileEditorComponent } from './profile/profile-editor/profile-editor.component';
 import { EventFilterPipe } from './event/event-filter/event-filter.pipe';
-import { EquipmentPageComponent } from './equipment-reservation/equipment-page/equipment-page.component';
-import { SharedModule } from "./shared/shared.module";
+// import { EquipmentPageComponent } from './equipment-reservation/equipment-page/equipment-page.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -50,8 +50,8 @@ import { SharedModule } from "./shared/shared.module";
     HomeComponent,
     AboutComponent,
     GateComponent,
-    ProfileEditorComponent,
-    EquipmentPageComponent
+    ProfileEditorComponent
+    // EquipmentPageComponent
   ],
   providers: [
     {
@@ -98,4 +98,4 @@ import { SharedModule } from "./shared/shared.module";
     SharedModule
   ]
 })
-export class AppModule { }
+export class AppModule {}
