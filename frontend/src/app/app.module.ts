@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -38,6 +39,8 @@ import { AboutComponent } from './about/about.component';
 import { GateComponent } from './gate/gate.component';
 import { ProfileEditorComponent } from './profile/profile-editor/profile-editor.component';
 import { EventFilterPipe } from './event/event-filter/event-filter.pipe';
+// import { EquipmentPageComponent } from './equipment-reservation/equipment-page/equipment-page.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,18 @@ import { EventFilterPipe } from './event/event-filter/event-filter.pipe';
     AboutComponent,
     GateComponent,
     ProfileEditorComponent
+    // EquipmentPageComponent
   ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    },
+    DatePipe,
+    EventFilterPipe
+  ],
+  bootstrap: [AppComponent],
   imports: [
     /* Angular */
     BrowserModule,
@@ -58,7 +72,6 @@ import { EventFilterPipe } from './event/event-filter/event-filter.pipe';
     AppRoutingModule,
     LayoutModule,
     ReactiveFormsModule,
-
     /* Material UI */
     MatButtonModule,
     MatCardModule,
@@ -81,17 +94,8 @@ import { EventFilterPipe } from './event/event-filter/event-filter.pipe';
           return localStorage.getItem('bearerToken');
         }
       }
-    })
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpRequestInterceptor,
-      multi: true
-    },
-    DatePipe,
-    EventFilterPipe
-  ],
-  bootstrap: [AppComponent]
+    }),
+    SharedModule
+  ]
 })
 export class AppModule {}
