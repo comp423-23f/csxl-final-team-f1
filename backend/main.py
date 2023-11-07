@@ -14,6 +14,7 @@ from .api import (
     user,
 )
 from .api.coworking import status, reservation, ambassador
+from .api.equipment import equipment
 from .api.admin import users as admin_users
 from .api.admin import roles as admin_roles
 from .services.exceptions import UserPermissionException, ResourceNotFoundException
@@ -57,6 +58,7 @@ feature_apis = [
     authentication,
     admin_users,
     admin_roles,
+    equipment,
 ]
 
 for feature_api in feature_apis:
