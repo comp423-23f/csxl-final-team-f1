@@ -3,8 +3,8 @@
 from sqlalchemy import Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship, Session, joinedload
 from ..entity_base import EntityBase
-from ...models.coworking import EquipmentDetails
-from ...models.coworking.seat import EquipmentIdentity, Equipment
+from ...models.equipment import EquipmentDetails
+from ...models.equipment.equipment import EquipmentIdentity, Equipment
 from typing import Self
 
 
@@ -28,7 +28,7 @@ class EquipmentEntity(EntityBase):
     # # EquipmentDetails Model Fields Follow
     # room_id: Mapped[str] = mapped_column(String, ForeignKey("coworking__room.id"))
 
-    # room: Mapped["RoomEntity"] = relationship("RoomEntity", back_populates="seats")  # type: ignore
+    room: Mapped["RoomEntity"] = relationship("RoomEntity", back_populates="seats")  # type: ignore
 
     def to_model(self) -> EquipmentDetails:
         """Converts the entity to a model.
@@ -40,10 +40,10 @@ class EquipmentEntity(EntityBase):
             name=self.name,
             image=self.image,
             reservable=self.reservable,
-            description=self.description
+            description=self.description,
             # x=self.x,
             # y=self.y,
-            # room=self.room.to_model(),
+            room=self.room.to_model(),
         )
 
     @classmethod
