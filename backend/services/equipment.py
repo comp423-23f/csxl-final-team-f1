@@ -1,5 +1,5 @@
 """
-The Equipment Service allows the API to manipulate organizations data in the database.
+The Equipment Service allows the API to manipulate equipment data in the database.
 """
 
 from fastapi import Depends
@@ -35,7 +35,7 @@ class EquipmentService:
         Returns:
             list[Equipment]: List of all `Equipment`
         """
-        # Select all entries in `Organization` table
+        # Select all entries in `Equipment` table
         query = select(EquipmentEntity)
         entities = self._session.scalars(query).all()
 
@@ -44,22 +44,22 @@ class EquipmentService:
 
     def create(self, subject: User, equipment: Equipment) -> Equipment:
         """
-        Creates a organization based on the input object and adds it to the table.
-        If the organization's ID is unique to the table, a new entry is added.
-        If the organization's ID already exists in the table, it raises an error.
+        Creates a equipment based on the input object and adds it to the table.
+        If the equipment's ID is unique to the table, a new entry is added.
+        If the equipment's ID already exists in the table, it raises an error.
 
         Parameters:
             subject: a valid User model representing the currently logged in User
-            organization (Organization): Organization to add to table
+            equipment (Equipment): Equipment to add to table
 
         Returns:
-            Organization: Object added to table
+            Equipment: Object added to table
         """
 
         # Check if user has admin permissions
-        self._permission.enforce(subject, "organization.create", f"organization")
+        self._permission.enforce(subject, "equipment.create", f"equipment")
 
-        # Checks if the organization already exists in the table
+        # Checks if the equipment already exists in the table
         if equipment.id:
             # Set id to None so database can handle setting the id
             equipment.id = None
@@ -77,20 +77,20 @@ class EquipmentService:
 
     def get_from_id(self, id: int) -> Equipment:
         """
-        Get the organization from a slug
+        Get the equipment from a id
         If none retrieved, a debug description is displayed.
 
         Parameters:
-            slug: a string representing a unique organization slug
+            id: an integer representing a unique equipment id
 
         Returns:
-            Organization: Object with corresponding slug
+            Equipment: Object with corresponding id
 
         Raises:
-            OrganizationNotFoundException if no organization is found with the corresponding slug
+            EquipmentNotFoundException if no equipment is found with the corresponding id
         """
 
-        # Query the organization with matching slug
+        # Query the equipment with matching id
         equipment = (
             self._session.query(EquipmentEntity)
             .filter(EquipmentEntity.id == id)
