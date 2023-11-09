@@ -27,7 +27,7 @@ class OrganizationNotFoundException(Exception):
 
 
 class EquipmentNotFoundException(Exception):
-    """EquipmentNotFoundException is raised when trying to access an organization that does not exist."""
+    """EquipmentNotFoundException is raised when trying to access an equipment that does not exist."""
 
     def __init__(self, id: int):
         super().__init__(f"No equipment found matching id: {id}")
