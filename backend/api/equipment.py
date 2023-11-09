@@ -4,13 +4,11 @@ Equipment routes are used to create, retrieve, and update Equipment."""
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from ..services.organization import OrganizationNotFoundException
+from ..services.equipment import EquipmentNotFoundException
 from ..services.permission import UserPermissionException
 from ..services import OrganizationService
-from ..services import EquipmentService
-from ..models.organization import Organization
+from ..services.equipment import EquipmentService
 from ..models.equipment import Equipment
-from ..models.organization_details import OrganizationDetails
 from ..api.authentication import registered_user
 from ..models.user import User
 
@@ -39,7 +37,7 @@ def get_equipment(
     return equipment_service.all()
 
 
-@api.post("", response_model=Equipment, tags=["Equipments"])
+@api.post("", response_model=Equipment, tags=["Equipment"])
 def new_equipment(
     equipment: Equipment,
     subject: User = Depends(registered_user),
@@ -61,7 +59,7 @@ def new_equipment(
     """
 
     try:
-        # Try to create and return new organization
+        # Try to create and return new equipment
         return equipment_service.create(subject, equipment)
     except Exception as e:
         # Raise 422 exception if creation fails (request body is shaped incorrectly / not authorized)
@@ -69,33 +67,33 @@ def new_equipment(
 
 
 @api.get(
-    "/{slug}",
+    "/{id}",
     responses={404: {"model": None}},
-    response_model=OrganizationDetails,
-    tags=["Organizations"],
+    response_model=Equipment,
+    tags=["Equipment"],
 )
-def get_organization_from_slug(
-    slug: str, organization_service: OrganizationService = Depends()
-) -> OrganizationDetails:
+def get_equipment_from_id(
+    id: int, equipment_service: EquipmentService = Depends()
+) -> Equipment:
     """
-    Get organization with matching slug
+    Get equipment with matching id
 
     Parameters:
-        slug: a string representing a unique identifier for an Organization
-        organization_service: a valid OrganizationService
+        id: an int representing a unique identifier for an Equipment
+        equipment_service: a valid EquipmentService
 
     Returns:
-        Organization: Organization with matching slug
+        Equipment: Equipment with matching id
 
     Raises:
-        HTTPException 404 if get_from_slug() raises an Exception
+        HTTPException 404 if get_equipment_from_id() raises an Exception
     """
 
-    # Try to get organization with matching slug
+    # Try to get equipment with matching id
     try:
-        # Return organization
-        return organization_service.get_from_slug(slug)
-    except OrganizationNotFoundException as e:
+        # Return equipment
+        return equipment_service.get_from_id(id)
+    except EquipmentNotFoundException as e:
         # Raise 404 exception if search fails (no response)
         raise HTTPException(status_code=404, detail=str(e))
 
@@ -104,7 +102,7 @@ def get_organization_from_slug(
     "",
     responses={404: {"model": None}},
     response_model=Equipment,
-    tags=["Equipments"],
+    tags=["Equipment"],
 )
 def update_equipment(
     equipment: Equipment,
@@ -126,16 +124,16 @@ def update_equipment(
         HTTPException 404 if update() raises an Exception
     """
     try:
-        # Return updated organization
+        # Return updated equipment
         return equipment_service.update(subject, equipment)
-    except (OrganizationNotFoundException, UserPermissionException) as e:
-        # Raise 404 exception if update fails (organization does not exist / not authorized)
+    except (EquipmentNotFoundException, UserPermissionException) as e:
+        # Raise 404 exception if update fails (equipment does not exist / not authorized)
         raise HTTPException(status_code=404, detail=str(e))
 
 
-@api.delete("/{id}", response_model=None, tags=["Equipments"])
-def delete_organization(
-    id: num,
+@api.delete("/{id}", response_model=None, tags=["Equipment"])
+def delete_equipment(
+    id: int,
     subject: User = Depends(registered_user),
     equipment_service=Depends(EquipmentService),
 ):
@@ -154,6 +152,6 @@ def delete_organization(
     try:
         # Try to delete equipment
         equipment_service.delete(subject, id)
-    except OrganizationNotFoundException as e:
-        # Raise 404 exception if delete fails (organization does not exist / not authorized)
+    except EquipmentNotFoundException as e:
+        # Raise 404 exception if delete fails (equipment does not exist / not authorized)
         raise HTTPException(status_code=404, detail=str(e))
