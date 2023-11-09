@@ -95,7 +95,7 @@ def insert_fake_data(session: Session):
     entities = []
     for x in equipment:
         # Equipment uses from_model, not sure why we have to use to_model
-        entity = EquipmentEntity.from_model(x)
+        entity = EquipmentEntity.to_model(x)
         session.add(entity)
         entities.append(entity)
 
