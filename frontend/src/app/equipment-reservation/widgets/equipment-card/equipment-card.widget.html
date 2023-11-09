@@ -12,4 +12,11 @@
     <mat-card-content class="description">
         <p>Description</p>
     </mat-card-content>
+
+    <!-- Link to Individual Organization Page -->
+    <!-- Change 1 to equipment.id once backend is done-->
+    <a class="details-link" [routerLink]="['/equipment', equipment.id]">
+        <button mat-stroked-button>DETAILS</button>
+    </a>
+
 </mat-card>

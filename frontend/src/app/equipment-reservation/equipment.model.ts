@@ -4,6 +4,4 @@ import { Event } from '../event/event.model';
 export interface Equipment {
   id: number | null;
   name: string;
-  logo: string;
-  short_description: string;
 }

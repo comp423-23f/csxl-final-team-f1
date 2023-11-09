@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import { Component, Input } from '@angular/core';
-// import { Organization } from '../../organization.model';
+import { Equipment } from '../../equipment.model';
 // import { Profile } from '/workspace/frontend/src/app/profile/profile.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { Component, Input } from '@angular/core';
 })
 export class EquipmentCard {
   /** Inputs and outputs go here */
-  //   @Input() organization!: Organization;
+  @Input() equipment!: Equipment;
   //   /** The profile of the currently signed in user */
   //   @Input() profile?: Profile;
   //   /** @deprecated Stores the permission values for a profile */
