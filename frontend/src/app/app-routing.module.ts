@@ -48,9 +48,9 @@ const routes: Routes = [
     path: 'equipment-reservation',
     title: 'Equipment Reservation',
     loadChildren: () =>
-      import(
-        './equipment-reservation/equipment-reservation.module'
-      ).then((m) => m.EquipmentReservationModule)
+      import('./equipment-reservation/equipment.module').then(
+        (m) => m.EquipmentReservationModule
+      )
   }
 ];
 
@@ -64,4 +64,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AppTitleStrategy.Provider]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

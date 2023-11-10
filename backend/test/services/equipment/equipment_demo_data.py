@@ -8,62 +8,62 @@ from ..reset_table_id_seq import reset_table_id_seq
 
 # Sample Data Objects
 
-vr1 = EquipmentEntity(
+vr1 = Equipment(
     id=1,
     name="VR Headset 1",
 )
 
-vr2 = EquipmentEntity(
+vr2 = Equipment(
     id=2,
     name="VR Headset 2",
 )
 
-vr3 = EquipmentEntity(
+vr3 = Equipment(
     id=3,
     name="VR Headset 3",
 )
 
-vr4 = EquipmentEntity(
+vr4 = Equipment(
     id=4,
     name="VR Headset 4",
 )
 
-keyboard1 = EquipmentEntity(
+keyboard1 = Equipment(
     id=5,
     name="Keyboard 1",
 )
 
-keyboard2 = EquipmentEntity(
+keyboard2 = Equipment(
     id=6,
     name="Keyboard 2",
 )
 
-keyboard3 = EquipmentEntity(
+keyboard3 = Equipment(
     id=7,
     name="Keyboard 3",
 )
 
-keyboard4 = EquipmentEntity(
+keyboard4 = Equipment(
     id=8,
     name="Keyboard 4",
 )
 
-mouse1 = EquipmentEntity(
+mouse1 = Equipment(
     id=9,
     name="Mouse 1",
 )
 
-mouse2 = EquipmentEntity(
+mouse2 = Equipment(
     id=10,
     name="Mouse 2",
 )
 
-mouse3 = EquipmentEntity(
+mouse3 = Equipment(
     id=11,
     name="Mouse 3",
 )
 
-mouse4 = EquipmentEntity(
+mouse4 = Equipment(
     id=12,
     name="Mouse 4",
 )
@@ -95,7 +95,7 @@ def insert_fake_data(session: Session):
     entities = []
     for x in equipment:
         # Equipment uses from_model, not sure why we have to use to_model
-        entity = EquipmentEntity.to_model(x)
+        entity = EquipmentEntity.from_model(x)
         session.add(entity)
         entities.append(entity)
 
