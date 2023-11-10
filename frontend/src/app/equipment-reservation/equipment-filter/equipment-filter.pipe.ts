@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /**
- * This is the pipe used to filter organizations on the organizations page.
+ * This is the pipe used to filter equipment on the equipment page.
  */
 
 import { Pipe, PipeTransform } from '@angular/core';
