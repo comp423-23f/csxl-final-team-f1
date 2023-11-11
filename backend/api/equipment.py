@@ -6,7 +6,6 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from ..services.equipment import EquipmentNotFoundException
 from ..services.permission import UserPermissionException
-from ..services import OrganizationService
 from ..services.equipment import EquipmentService
 from ..models.equipment import Equipment
 from ..api.authentication import registered_user

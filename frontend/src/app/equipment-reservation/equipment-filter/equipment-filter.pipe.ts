@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /**
  * This is the pipe used to filter equipment on the equipment page.
  */
@@ -16,12 +15,12 @@ export class EquipmentFilterPipe implements PipeTransform {
    * @returns {Observable<Equipment[]>}
    */
   transform(equipment: Equipment[], searchQuery: String): Equipment[] {
-    // Sort the organizations list alphabetically by name
+    // Sort the equipment list alphabetically by name
     equipment = equipment.sort((a: Equipment, b: Equipment) => {
       return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
     });
 
-    // If a search query is provided, return the organizations that start with the search query.
+    // If a search query is provided, return the equipment that start with the search query.
     if (searchQuery) {
       return equipment.filter((equipment) =>
         equipment.name.toLowerCase().includes(searchQuery.toLowerCase())

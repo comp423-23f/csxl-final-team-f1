@@ -35,7 +35,7 @@ export class EquipmentPageComponent {
   /** Store the currently-logged-in user's profile.  */
   public profile: Profile;
 
-  /** Stores the user permission value for current organization. */
+  /** Stores the user permission value for current equipment. */
   public permValues: Map<number, number> = new Map();
 
   constructor(

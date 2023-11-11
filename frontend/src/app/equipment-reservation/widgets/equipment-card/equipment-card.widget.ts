@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Component, Input } from '@angular/core';
 import { Equipment } from '../../equipment.model';
 import { Profile } from '/workspace/frontend/src/app/profile/profile.service';

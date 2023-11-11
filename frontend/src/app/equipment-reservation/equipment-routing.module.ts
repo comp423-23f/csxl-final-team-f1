@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /**
  * The Equipment Routing Module holds all of the routes that are children
  * to the path /equipment/...

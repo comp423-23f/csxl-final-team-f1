@@ -8,7 +8,7 @@ import { ResolveFn } from '@angular/router';
 import { Equipment } from './equipment.model';
 import { EquipmentReservationService } from './equipment.service';
 
-/** This resolver injects the list of organizations into the organization component. */
+/** This resolver injects the list of equipment into the equipment component. */
 export const equipmentResolver: ResolveFn<Equipment[] | undefined> = (
   route,
   state
