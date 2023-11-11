@@ -24,3 +24,10 @@ class OrganizationNotFoundException(Exception):
 
     def __init__(self, id: str):
         super().__init__(f"No organization found matching slug/id: {id}")
+
+
+class EquipmentNotFoundException(Exception):
+    """EquipmentNotFoundException is raised when trying to access an equipment that does not exist."""
+
+    def __init__(self, id: int):
+        super().__init__(f"No equipment found matching id: {id}")
