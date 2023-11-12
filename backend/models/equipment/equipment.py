@@ -11,3 +11,7 @@ class Equipment(BaseModel):
 
     id: int | None = None
     name: str
+
+
+class EquipmentIdentity(BaseModel):
+    id: int
