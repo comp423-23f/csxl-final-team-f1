@@ -20,6 +20,8 @@ class EquipmentEntity(EntityBase):
     # Name of the device
     name: Mapped[str] = mapped_column(String, nullable=False, default="")
 
+    image: Mapped[str] = mapped_column(String, nullable=True, default="")
+
     @classmethod
     def from_model(cls, model: Equipment) -> Self:
         """
@@ -33,6 +35,7 @@ class EquipmentEntity(EntityBase):
         return cls(
             id=model.id,
             name=model.name,
+            image=model.image,
         )
 
     def to_model(self) -> Equipment:
@@ -45,5 +48,5 @@ class EquipmentEntity(EntityBase):
         return Equipment(
             id=self.id,
             name=self.name,
+            image=self.image,
         )
-    

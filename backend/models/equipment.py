@@ -11,3 +11,4 @@ class Equipment(BaseModel):
 
     id: int | None = None
     name: str
+    image: str
