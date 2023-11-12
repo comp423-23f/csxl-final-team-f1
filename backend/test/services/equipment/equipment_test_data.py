@@ -2,8 +2,8 @@
 
 import pytest
 from sqlalchemy.orm import Session
-from ....models.equipment import Equipment
-from ....entities.equipment_entity import EquipmentEntity
+from ....models.equipment.equipment import Equipment
+from ....entities.equipment.equipment_entity import EquipmentEntity
 
 from ..reset_table_id_seq import reset_table_id_seq
 
@@ -19,7 +19,7 @@ keyboard1 = Equipment(
     name="Keyboard 1",
 )
 
-mouse1 = Equipment(
+mouse1 = EquipmentEntity(
     id=3,
     name="Mouse 1",
 )

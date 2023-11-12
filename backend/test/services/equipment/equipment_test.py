@@ -8,7 +8,7 @@ from backend.services.equipment import EquipmentNotFoundException
 from backend.services.exceptions import UserPermissionException
 
 # Tested Dependencies
-from ....models.equipment import Equipment
+from ....models.equipment.equipment import Equipment
 from ....services.equipment import EquipmentService
 
 # Injected Service Fixtures

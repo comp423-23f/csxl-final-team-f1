@@ -2,9 +2,9 @@
 
 from sqlalchemy import Integer, String, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from .entity_base import EntityBase
+from ..entity_base import EntityBase
 from typing import Self
-from ..models.equipment import Equipment
+from ...models.equipment.equipment import Equipment
 
 
 class EquipmentEntity(EntityBase):
@@ -46,4 +46,3 @@ class EquipmentEntity(EntityBase):
             id=self.id,
             name=self.name,
         )
-    

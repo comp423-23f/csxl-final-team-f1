@@ -4,11 +4,12 @@
 from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+
+from .api.equipment import equipment
 from .api import (
     events,
     health,
     organizations,
-    equipment,
     static_files,
     profile,
     authentication,

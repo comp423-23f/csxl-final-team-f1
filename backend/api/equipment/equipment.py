@@ -4,12 +4,12 @@ Equipment routes are used to create, retrieve, and update Equipment."""
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from ..services.equipment import EquipmentNotFoundException
-from ..services.permission import UserPermissionException
-from ..services.equipment import EquipmentService
-from ..models.equipment import Equipment
-from ..api.authentication import registered_user
-from ..models.user import User
+from ...services.equipment.equipment import EquipmentNotFoundException
+from ...services.permission import UserPermissionException
+from ...services.equipment.equipment import EquipmentService
+from ...models.equipment.equipment import Equipment
+from ..authentication import registered_user
+from ...models.user import User
 
 api = APIRouter(prefix="/api/equipment")
 openapi_tags = {

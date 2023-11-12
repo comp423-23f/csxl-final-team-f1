@@ -6,14 +6,13 @@ from fastapi import Depends
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from ..database import db_session
-from ..models.equipment import Equipment
-from ..entities.equipment_entity import EquipmentEntity
-from ..models import User
-from .permission import PermissionService
+from ...database import db_session
+from ...models.equipment.equipment import Equipment
+from ...entities.equipment.equipment_entity import EquipmentEntity
+from ...models import User
+from ..permission import PermissionService
 
-from .exceptions import EquipmentNotFoundException
-from .exceptions import UserPermissionException
+from ..exceptions import EquipmentNotFoundException
 
 
 class EquipmentService:

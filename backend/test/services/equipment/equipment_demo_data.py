@@ -2,8 +2,8 @@
 
 import pytest
 from sqlalchemy.orm import Session
-from ....models.equipment import Equipment
-from ....entities.equipment_entity import EquipmentEntity
+from ....models.equipment.equipment import Equipment
+from ....entities.equipment.equipment_entity import EquipmentEntity
 from ..reset_table_id_seq import reset_table_id_seq
 
 # Sample Data Objects
@@ -94,7 +94,6 @@ def insert_fake_data(session: Session):
     # Create entities for test equipment data
     entities = []
     for x in equipment:
-        # Equipment uses from_model, not sure why we have to use to_model
         entity = EquipmentEntity.from_model(x)
         session.add(entity)
         entities.append(entity)
