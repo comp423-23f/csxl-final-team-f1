@@ -10,6 +10,7 @@ from ...services import (
     OrganizationService,
     EventService,
 )
+from ...services.equipment import EquipmentService
 
 __authors__ = ["Kris Jordan", "Ajay Gandecha"]
 __copyright__ = "Copyright 2023"
@@ -48,6 +49,12 @@ def role_svc(session: Session, permission_svc_mock: PermissionService):
 def organization_svc_integration(session: Session):
     """This fixture is used to test the OrganizationService class with a real PermissionService."""
     return OrganizationService(session, PermissionService(session))
+
+
+@pytest.fixture()
+def equipment_svc_integration(session: Session):
+    """This fixture is used to test the EquipmentService class with a real PermissionService."""
+    return EquipmentService(session, PermissionService(session))
 
 
 @pytest.fixture()
