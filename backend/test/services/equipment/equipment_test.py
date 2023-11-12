@@ -4,12 +4,12 @@
 import pytest
 from unittest.mock import create_autospec
 
-from backend.services.equipment import EquipmentNotFoundException
+from backend.services.equipment.equipment import EquipmentNotFoundException
 from backend.services.exceptions import UserPermissionException
 
 # Tested Dependencies
 from ....models.equipment.equipment import Equipment
-from ....services.equipment import EquipmentService
+from ....services.equipment.equipment import EquipmentService
 
 # Injected Service Fixtures
 from ..fixtures import equipment_svc_integration
