@@ -134,7 +134,7 @@ def update_equipment(
 def delete_equipment(
     id: int,
     subject: User = Depends(registered_user),
-    equipment_service=Depends(EquipmentService),
+    equipment_service: EquipmentService = Depends(EquipmentService),
 ):
     """
     Delete Equipment based on id

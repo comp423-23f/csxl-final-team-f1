@@ -11,61 +11,73 @@ from ..reset_table_id_seq import reset_table_id_seq
 vr1 = Equipment(
     id=1,
     name="VR Headset 1",
+    available=True,
 )
 
 vr2 = Equipment(
     id=2,
     name="VR Headset 2",
+    available=True,
 )
 
 vr3 = Equipment(
     id=3,
     name="VR Headset 3",
+    available=True,
 )
 
 vr4 = Equipment(
     id=4,
     name="VR Headset 4",
+    available=True,
 )
 
 keyboard1 = Equipment(
     id=5,
     name="Keyboard 1",
+    available=True,
 )
 
 keyboard2 = Equipment(
     id=6,
     name="Keyboard 2",
+    available=True,
 )
 
 keyboard3 = Equipment(
     id=7,
     name="Keyboard 3",
+    available=True,
 )
 
 keyboard4 = Equipment(
     id=8,
     name="Keyboard 4",
+    available=True,
 )
 
 mouse1 = Equipment(
     id=9,
     name="Mouse 1",
+    available=True,
 )
 
 mouse2 = Equipment(
     id=10,
     name="Mouse 2",
+    available=True,
 )
 
 mouse3 = Equipment(
     id=11,
     name="Mouse 3",
+    available=True,
 )
 
 mouse4 = Equipment(
     id=12,
     name="Mouse 4",
+    available=True,
 )
 
 equipment = [
