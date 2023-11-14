@@ -20,7 +20,7 @@ class EquipmentEntity(EntityBase):
     # Name of the device
     name: Mapped[str] = mapped_column(String, nullable=False, default="")
     # Availability of the device
-    available: Mapped[bool] = mapped_column(Boolean, nullable=False, default="")
+    available: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
 
     @classmethod
     def from_model(cls, model: Equipment) -> Self:

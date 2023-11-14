@@ -50,8 +50,8 @@ body {
 /* Global Material Website Themes */
 
 // Definition of DARK Theme - Follows Material's Dark Color Palette
-$dark-theme: mat.define-dark-theme((color: (primary: mat.define-palette(mat.$pink-palette, 700, 500, 900),
-                accent: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400),
+$dark-theme: mat.define-dark-theme((color: (primary: mat.define-palette(mat.$blue-palette, 700, 500, 900),
+                accent: mat.define-palette(mat.$green-palette, A200, A100, A400),
             ),
             // Only need to include `typography` and `density` in the default dark theme.
             typography: mat.define-typography-config(),
@@ -59,8 +59,8 @@ $dark-theme: mat.define-dark-theme((color: (primary: mat.define-palette(mat.$pin
         ));
 
 // Definition of LIGHT Theme - Follows Material's Light Color Palette
-$light-theme: mat.define-light-theme((color: (primary: mat.define-palette(mat.$indigo-palette),
-                accent: mat.define-palette(mat.$pink-palette),
+$light-theme: mat.define-light-theme((color: (primary: mat.define-palette(mat.$blue-palette),
+                accent: mat.define-palette(mat.$green-palette),
             ),
         ));
 
