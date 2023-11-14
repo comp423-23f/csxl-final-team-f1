@@ -1,4 +1,8 @@
+from .room import Room
+from .room_details import RoomDetails
+
 from .equipment import Equipment
+from .equipment_details import EquipmentDetails
 
 from .time_range import TimeRange
 
@@ -13,11 +17,15 @@ from .reservation import (
 )
 
 from .availability_list import AvailabilityList
-from .availability import EquipmentAvailability
+from .availability import EquipmentAvailability, RoomAvailability
 
 from .status import Status
 
 __all__ = [
+    "Room",
+    "RoomDetails",
+    "Equipment",
+    "EquipmentDetails",
     "TimeRange",
     "OperatingHours",
     "Reservation",
@@ -26,6 +34,7 @@ __all__ = [
     "ReservationPartial",
     "ReservationIdentity",
     "AvailabilityList",
+    "RoomAvailability",
     "EquipmentAvailability",
     "Status",
 ]

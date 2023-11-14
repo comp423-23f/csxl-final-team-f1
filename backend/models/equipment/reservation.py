@@ -2,8 +2,9 @@ from enum import Enum
 from pydantic import BaseModel
 from datetime import datetime
 from ...models.user import User, UserIdentity
-from .time_range import TimeRange
+from .room import Room
 from .equipment import Equipment, EquipmentIdentity
+from .time_range import TimeRange
 
 
 class ReservationState(str, Enum):
@@ -27,6 +28,7 @@ class Reservation(ReservationIdentity, TimeRange):
     state: ReservationState
     users: list[User] = []
     equipment: list[Equipment] = []
+    room: Room | None = None
     walkin: bool = False
     created_at: datetime
     updated_at: datetime
@@ -38,6 +40,7 @@ class ReservationPartial(Reservation, BaseModel):
     state: ReservationState | None = None
     users: list[User] | None = None
     equipment: list[Equipment] | None = None
+    room: Room | None = None
     walkin: bool | None = None
     created_at: datetime | None = None
     updated_at: datetime | None = None

@@ -19,10 +19,17 @@ from .. import entities
 
 from ..test.services import role_data, user_data, permission_data
 from ..test.services.organization import organization_test_data
-from ..test.services.equipment import equipment_test_data
+from ..test.services.equipment import equipment_data
 from ..test.services.event import event_test_data
 from ..test.services.coworking import room_data, seat_data, operating_hours_data, time
 from ..test.services.coworking.reservation import reservation_data
+from ..test.services.equipment import (
+    room_data,
+    equipment_data,
+    operating_hours_data,
+    time,
+)
+from ..test.services.equipment.reservation import reservation_data
 
 __authors__ = ["Kris Jordan", "Ajay Gandecha"]
 __copyright__ = "Copyright 2023"
@@ -50,8 +57,8 @@ with Session(engine) as session:
     operating_hours_data.insert_fake_data(session, time)
     room_data.insert_fake_data(session)
     seat_data.insert_fake_data(session)
+    equipment_data.insert_fake_data(session)
     reservation_data.insert_fake_data(session, time)
-    equipment_test_data.insert_fake_data(session)
 
     # Commit changes to the database
     session.commit()

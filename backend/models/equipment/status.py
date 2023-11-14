@@ -1,4 +1,4 @@
-"""Represent the status of the XL coworking space."""
+"""Represent the status of the XL equipment space."""
 
 from pydantic import BaseModel
 from typing import Sequence
@@ -9,7 +9,7 @@ from .operating_hours import OperatingHours
 
 
 class Status(BaseModel):
-    """The status of the XL coworking space, including reservations, for a given user."""
+    """The status of the XL equipment space, including reservations, for a given user."""
 
     my_reservations: Sequence[Reservation]
     equipment_availability: Sequence[EquipmentAvailability]

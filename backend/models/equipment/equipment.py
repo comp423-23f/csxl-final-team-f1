@@ -1,17 +1,17 @@
+"""Seat models a physical working space in the coworking space."""
+
 from pydantic import BaseModel
-
-
-class Equipment(BaseModel):
-    """
-    Pydantic model to represent an `Equipment`.
-
-    This model is based on the `EquipmentEntity` model, which defines the shape
-    of the `Equipment` database in the PostgreSQL database.
-    """
-
-    id: int | None = None
-    name: str
 
 
 class EquipmentIdentity(BaseModel):
     id: int
+
+
+class Equipment(EquipmentIdentity, BaseModel):
+    id: int
+    name: str
+    reservable: bool
+
+
+class NewEquipment(Equipment, BaseModel):
+    id: int | None = None

@@ -1,48 +1,64 @@
-"""Definition of SQLAlchemy table-backed object mapping entity for Equipment."""
+"""Entity for Equipment."""
 
-from sqlalchemy import Integer, String, Boolean
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import Integer, String, Boolean, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship, Session, joinedload
 from ..entity_base import EntityBase
+from ...models.equipment import EquipmentDetails
+from ...models.equipment.equipment import EquipmentIdentity, Equipment
 from typing import Self
-from ...models.equipment.equipment import Equipment
 
 
 class EquipmentEntity(EntityBase):
-    """Serves as the database model schema defining the shape of the `Equipment` table"""
+    """Entity for Equipment under XL management."""
 
-    # Name for the equipment table in the PostgreSQL database
     __tablename__ = "equipment"
 
-    # Equipment properties (columns in the database table)
+    # Equipment Model Fields
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String)
+    reservable: Mapped[bool] = mapped_column(Boolean)
+    # EquipmentDetails Model Fields Follow
+    room_id: Mapped[str] = mapped_column(String, ForeignKey("room.id"))
 
-    # Unique ID for the device
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    # Name of the device
-    name: Mapped[str] = mapped_column(String, nullable=False, default="")
+    room: Mapped["RoomEntity"] = relationship("RoomEntity", back_populates="equipment")  # type: ignore
+
+    def to_model(self) -> EquipmentDetails:
+        """Converts the entity to a model.
+
+        Returns:
+            equipment: The model representation of the entity."""
+        return EquipmentDetails(
+            id=self.id,
+            name=self.name,
+            reservable=self.reservable,
+            room=self.room.to_model(),
+        )
 
     @classmethod
-    def from_model(cls, model: Equipment) -> Self:
-        """
-        Class method that converts an `Equipment` model into a `EquipmentEntity`
+    def get_models_from_identities(
+        cls, session: Session, identities: list[EquipmentIdentity]
+    ) -> list[Equipment]:
+        equipment_ids = [equipment.id for equipment in identities]
+        entities = (
+            session.query(cls)
+            .filter(cls.id.in_(equipment_ids))
+            .options(joinedload(EquipmentEntity.room))
+            .all()
+        )
+        return [entity.to_model() for entity in entities]
 
-        Parameters:
-            - model (Equipment): Model to convert into an entity
+    @classmethod
+    def from_model(cls, model: EquipmentDetails) -> Self:
+        """Create an EquipmentEntity from a Equipment model.
+
+        Args:
+            model (Equipment): The model to create the entity from.
+
         Returns:
-            EquipmentEntity: Entity created from model
-        """
+            Self: The entity (not yet persisted)."""
         return cls(
             id=model.id,
             name=model.name,
-        )
-
-    def to_model(self) -> Equipment:
-        """
-        Converts a `EquipmentEntity` object into a `Equipment` model object
-
-        Returns:
-            Equipment: `Equipment` object from the entity
-        """
-        return Equipment(
-            id=self.id,
-            name=self.name,
+            reservable=model.reservable,
+            room_id=model.room.id,
         )
