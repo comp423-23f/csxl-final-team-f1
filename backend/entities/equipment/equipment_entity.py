@@ -3,7 +3,6 @@
 from sqlalchemy import Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship, Session, joinedload
 from ..entity_base import EntityBase
-from ...models.equipment import EquipmentDetails
 from ...models.equipment.equipment import EquipmentIdentity, Equipment
 from typing import Self
 
@@ -17,21 +16,16 @@ class EquipmentEntity(EntityBase):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String)
     reservable: Mapped[bool] = mapped_column(Boolean)
-    # EquipmentDetails Model Fields Follow
-    room_id: Mapped[str] = mapped_column(String, ForeignKey("room.id"))
 
-    room: Mapped["RoomEntity"] = relationship("RoomEntity", back_populates="equipment")  # type: ignore
-
-    def to_model(self) -> EquipmentDetails:
+    def to_model(self) -> Equipment:
         """Converts the entity to a model.
 
         Returns:
             equipment: The model representation of the entity."""
-        return EquipmentDetails(
+        return Equipment(
             id=self.id,
             name=self.name,
             reservable=self.reservable,
-            room=self.room.to_model(),
         )
 
     @classmethod
@@ -39,16 +33,11 @@ class EquipmentEntity(EntityBase):
         cls, session: Session, identities: list[EquipmentIdentity]
     ) -> list[Equipment]:
         equipment_ids = [equipment.id for equipment in identities]
-        entities = (
-            session.query(cls)
-            .filter(cls.id.in_(equipment_ids))
-            .options(joinedload(EquipmentEntity.room))
-            .all()
-        )
+        entities = session.query(cls).filter(cls.id.in_(equipment_ids)).all()
         return [entity.to_model() for entity in entities]
 
     @classmethod
-    def from_model(cls, model: EquipmentDetails) -> Self:
+    def from_model(cls, model: Equipment) -> Self:
         """Create an EquipmentEntity from a Equipment model.
 
         Args:
@@ -60,5 +49,4 @@ class EquipmentEntity(EntityBase):
             id=model.id,
             name=model.name,
             reservable=model.reservable,
-            room_id=model.room.id,
         )

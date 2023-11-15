@@ -26,10 +26,8 @@ class ReservationRequest(TimeRange):
 
 class Reservation(ReservationIdentity, TimeRange):
     state: ReservationState
-    users: list[User] = []
+    user: User
     equipment: list[Equipment] = []
-    room: Room | None = None
-    walkin: bool = False
     created_at: datetime
     updated_at: datetime
 
@@ -41,7 +39,6 @@ class ReservationPartial(Reservation, BaseModel):
     users: list[User] | None = None
     equipment: list[Equipment] | None = None
     room: Room | None = None
-    walkin: bool | None = None
     created_at: datetime | None = None
     updated_at: datetime | None = None
 

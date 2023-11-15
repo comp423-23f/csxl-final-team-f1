@@ -17,7 +17,6 @@ from ...models.equipment import (
     EquipmentAvailability,
     ReservationState,
     AvailabilityList,
-    OperatingHours,
 )
 from ...entities import UserEntity
 from ...entities.equipment import ReservationEntity, EquipmentEntity
@@ -32,7 +31,7 @@ class ReservationException(Exception):
         super().__init__(message)
 
 
-class ReservationService:
+class EquipmentReservationService:
     """ReservationService is the access layer to managing reservations for equipment."""
 
     def __init__(

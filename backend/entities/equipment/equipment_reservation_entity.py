@@ -7,23 +7,25 @@ from ..entity_base import EntityBase
 from ...models.equipment import Reservation, ReservationState
 from .equipment_entity import EquipmentEntity
 from ..user_entity import UserEntity
-from .reservation_user_table import reservation_user_table
-from .reservation_equipment_table import reservation_equipment_table
+
+# from .reservation_user_table import reservation_user_table
+# from .reservation_equipment_table import reservation_equipment_table
 from typing import Self
 
 
 class ReservationEntity(EntityBase):
-    __tablename__ = "equipment__reservation"
+    __tablename__ = "equipment_reservation"
     __table_args__ = (
-        Index("equipment__reservation_time_idx", "start", "end", "state", unique=False),
+        Index("reservation_time_idx", "start", "end", "state", unique=False),
     )
 
     # Reservation Model Fields
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    equipment_id: Mapped[int] = mapped_column(ForeignKey("equipment_id"))
+    user_id: Mapped[int] = mapped_column(ForeignKey("user_id"))
     start: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     end: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     state: Mapped[ReservationState] = mapped_column(String, nullable=False)
-    walkin: Mapped[bool] = mapped_column(Boolean, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.now, nullable=False
     )
@@ -32,10 +34,8 @@ class ReservationEntity(EntityBase):
     )
 
     # Relationships
-    users: Mapped[list[UserEntity]] = relationship(secondary=reservation_user_table)
-    equipment: Mapped[list[EquipmentEntity]] = relationship(
-        secondary=reservation_equipment_table
-    )
+    user: Mapped[UserEntity] = relationship("UserEntity")
+    equipment: Mapped[list[EquipmentEntity]] = relationship("EquipmentEntity")
 
     def to_model(self) -> Reservation:
         """Converts the entity to a model.
@@ -47,9 +47,8 @@ class ReservationEntity(EntityBase):
             start=self.start,
             end=self.end,
             state=self.state,
-            users=[user.to_model() for user in self.users],
+            user=self.user.to_model(),
             equipment=[equipment.to_model() for equipment in self.equipment],
-            walkin=self.walkin,
             created_at=self.created_at,
             updated_at=self.updated_at,
         )
@@ -69,10 +68,7 @@ class ReservationEntity(EntityBase):
             start=model.start,
             end=model.end,
             state=model.state,
-            walkin=model.walkin,
-            users=[session.get(UserEntity, user.id) for user in model.users]
-            if session
-            else [],
+            user=session.get(UserEntity, id) if session else [],
             equipment=[
                 session.get(EquipmentEntity, equipment.id)
                 for equipment in model.equipment

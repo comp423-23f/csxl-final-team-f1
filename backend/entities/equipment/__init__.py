@@ -1,5 +1,4 @@
-from .operating_hours_entity import OperatingHoursEntity
-from .room_entity import RoomEntity
 from .equipment_entity import EquipmentEntity
-from .reservation_entity import ReservationEntity
-from .reservation_equipment_table import reservation_equipment_table
+from .equipment_reservation_entity import ReservationEntity
+
+# from .reservation_equipment_table import reservation_equipment_table

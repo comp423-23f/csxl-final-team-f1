@@ -3,7 +3,7 @@
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from ...database import db_session
-from ...models.equipment import Equipment, EquipmentDetails
+from ...models.equipment import Equipment
 from ...entities.equipment import EquipmentEntity
 
 
@@ -18,11 +18,11 @@ class EquipmentService:
         """
         self._session = session
 
-    def list(self) -> list[EquipmentDetails]:
-        """Returns all equipments in the equipment space.
+    def list(self) -> list[Equipment]:
+        """Returns all equipments in the space.
 
         Returns:
-            list[EquipmentDetails]: All rooms in the equipment space orderd by increasing capacity.
+            list[Equipment]: All equipment space orderd by increasing capacity.
         """
         entities = self._session.query(EquipmentEntity).all()
         return [entity.to_model() for entity in entities]
