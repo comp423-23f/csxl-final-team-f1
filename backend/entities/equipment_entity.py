@@ -19,6 +19,8 @@ class EquipmentEntity(EntityBase):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     # Name of the device
     name: Mapped[str] = mapped_column(String, nullable=False, default="")
+    # Availability of the device
+    reservable: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
 
     image: Mapped[str] = mapped_column(String, nullable=True, default="")
 
@@ -35,6 +37,7 @@ class EquipmentEntity(EntityBase):
         return cls(
             id=model.id,
             name=model.name,
+            reservable=model.reservable,
             image=model.image,
         )
 
@@ -48,5 +51,6 @@ class EquipmentEntity(EntityBase):
         return Equipment(
             id=self.id,
             name=self.name,
+            reservable=self.reservable,
             image=self.image,
         )

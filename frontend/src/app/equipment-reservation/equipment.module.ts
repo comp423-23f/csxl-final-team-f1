@@ -7,6 +7,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatBadgeModule } from '@angular/material/badge';
 
 /* Angular Material Modules */
 import { MatTableModule } from '@angular/material/table';
@@ -48,6 +49,7 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     MatTabsModule,
+    MatBadgeModule,
     MatTableModule,
     MatCardModule,
     MatDialogModule,

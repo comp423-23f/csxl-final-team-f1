@@ -11,72 +11,84 @@ from ..reset_table_id_seq import reset_table_id_seq
 vr1 = Equipment(
     id=1,
     name="VR Headset 1",
+    reservable=True,
     image="https://s7d1.scene7.com/is/image/dmqualcommprod/meta-quest-3-4?$QC_Responsive$&fmt=png-alpha",
 )
 
 vr2 = Equipment(
     id=2,
     name="VR Headset 2",
+    reservable=True,
     image="https://s7d1.scene7.com/is/image/dmqualcommprod/meta-quest-3-4?$QC_Responsive$&fmt=png-alpha",
 )
 
 vr3 = Equipment(
     id=3,
     name="VR Headset 3",
+    reservable=True,
     image="https://s7d1.scene7.com/is/image/dmqualcommprod/meta-quest-3-4?$QC_Responsive$&fmt=png-alpha",
 )
 
 vr4 = Equipment(
     id=4,
     name="VR Headset 4",
+    reservable=True,
     image="https://s7d1.scene7.com/is/image/dmqualcommprod/meta-quest-3-4?$QC_Responsive$&fmt=png-alpha",
 )
 
 keyboard1 = Equipment(
     id=5,
     name="Keyboard 1",
+    reservable=True,
     image="https://pngimg.com/uploads/keyboard/keyboard_PNG101845.png",
 )
 
 keyboard2 = Equipment(
     id=6,
     name="Keyboard 2",
+    reservable=True,
     image="https://pngimg.com/uploads/keyboard/keyboard_PNG101845.png",
 )
 
 keyboard3 = Equipment(
     id=7,
     name="Keyboard 3",
+    reservable=True,
     image="https://pngimg.com/uploads/keyboard/keyboard_PNG101845.png",
 )
 
 keyboard4 = Equipment(
     id=8,
     name="Keyboard 4",
+    reservable=True,
     image="https://pngimg.com/uploads/keyboard/keyboard_PNG101845.png",
 )
 
 mouse1 = Equipment(
     id=9,
     name="Mouse 1",
+    reservable=True,
     image="https://purepng.com/public/uploads/large/one-rat-p5i.png",
 )
 
 mouse2 = Equipment(
     id=10,
     name="Mouse 2",
+    reservable=True,
     image="https://purepng.com/public/uploads/large/one-rat-p5i.png",
 )
 
 mouse3 = Equipment(
     id=11,
     name="Mouse 3",
+    reservable=True,
     image="https://purepng.com/public/uploads/large/one-rat-p5i.png",
 )
 
 mouse4 = Equipment(
     id=12,
     name="Mouse 4",
+    reservable=True,
     image="https://purepng.com/public/uploads/large/one-rat-p5i.png",
 )
 

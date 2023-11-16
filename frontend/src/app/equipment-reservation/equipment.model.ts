@@ -2,5 +2,6 @@
 export interface Equipment {
   id: number | null;
   name: string;
+  reservable: boolean;
   image: string;
 }
