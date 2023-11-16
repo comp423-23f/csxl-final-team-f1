@@ -11,4 +11,4 @@ class Equipment(BaseModel):
 
     id: int | None = None
     name: str
-    available: bool
+    reservable: bool

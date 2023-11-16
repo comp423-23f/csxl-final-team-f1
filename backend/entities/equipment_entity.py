@@ -20,7 +20,7 @@ class EquipmentEntity(EntityBase):
     # Name of the device
     name: Mapped[str] = mapped_column(String, nullable=False, default="")
     # Availability of the device
-    available: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    reservable: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
 
     @classmethod
     def from_model(cls, model: Equipment) -> Self:
@@ -35,7 +35,7 @@ class EquipmentEntity(EntityBase):
         return cls(
             id=model.id,
             name=model.name,
-            available=model.available,
+            reservable=model.reservable,
         )
 
     def to_model(self) -> Equipment:
@@ -48,5 +48,5 @@ class EquipmentEntity(EntityBase):
         return Equipment(
             id=self.id,
             name=self.name,
-            available=self.available,
+            reservable=self.reservable,
         )

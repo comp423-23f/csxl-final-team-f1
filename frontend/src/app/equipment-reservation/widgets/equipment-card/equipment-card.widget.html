@@ -5,7 +5,10 @@
     <!-- Container for Logo and Name to allow for left alignment -->
     <div class="left-container">
       <!-- Equipment Name -->
-      <mat-card-title class="name" [matTooltip]="equipment.name" matTooltipPosition="above">
+      <mat-card-title
+        class="name"
+        [matTooltip]="equipment.name"
+        matTooltipPosition="above">
         {{ equipment.name }}
       </mat-card-title>
     </div>
@@ -17,9 +20,15 @@
     <a class="" [routerLink]="['/equipment', equipment.id]">
       <button mat-raised-button color="primary">Reserve</button>
       <!-- Badge to show availability -->
-      <mat-badge *ngIf="equipment.available" matBadgeColor="accent" matBadge="1"></mat-badge>
+      <mat-badge
+        *ngIf="equipment.reservable"
+        matBadgeColor="accent"
+        matBadge="1"></mat-badge>
 
-      <mat-badge *ngIf="!equipment.available" matBadgeColor="warn" matBadge="0"></mat-badge>
+      <mat-badge
+        *ngIf="!equipment.reservable"
+        matBadgeColor="warn"
+        matBadge="0"></mat-badge>
     </a>
   </mat-card-actions>
 </mat-card>
