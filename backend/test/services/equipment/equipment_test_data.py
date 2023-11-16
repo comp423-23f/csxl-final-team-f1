@@ -12,29 +12,32 @@ from ..reset_table_id_seq import reset_table_id_seq
 vr1 = Equipment(
     id=1,
     name="Virtual Headset 1",
+    image="https://s7d1.scene7.com/is/image/dmqualcommprod/meta-quest-3-4?$QC_Responsive$&fmt=png-alpha",
 )
 
 keyboard1 = Equipment(
     id=2,
     name="Keyboard 1",
+    image="https://pngimg.com/uploads/keyboard/keyboard_PNG101845.png",
 )
 
 mouse1 = Equipment(
     id=3,
     name="Mouse 1",
+    image="https://purepng.com/public/uploads/large/one-rat-p5i.png",
 )
 
 equipment = [vr1, keyboard1, mouse1]
 equipment_names = [vr1.name, keyboard1.name, mouse1.name]
 
-to_add = Equipment(
-    name="Virtual Headset 2",
-)
+# to_add = Equipment(
+#     name="Virtual Headset 2",
+# )
 
-new_vr1 = Equipment(
-    id=1,
-    name="Virtual Headset 1",
-)
+# new_vr1 = Equipment(
+#     id=1,
+#     name="Virtual Headset 1",
+# )
 
 # Data Functions
 

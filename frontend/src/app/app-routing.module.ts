@@ -64,4 +64,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AppTitleStrategy.Provider]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
