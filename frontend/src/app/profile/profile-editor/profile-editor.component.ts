@@ -91,4 +91,15 @@ export class ProfileEditorComponent implements OnInit {
       next: () => (this.profile.github = '')
     });
   }
+
+  agreeToTerms(event: any) {
+    // Your logic when the checkbox state changes
+    if (event.checked) {
+      console.log('Checkbox is checked');
+      // Call your function or perform any action here
+    } else {
+      console.log('Checkbox is unchecked');
+      // Handle the unchecked state if needed
+    }
+  }
 }
