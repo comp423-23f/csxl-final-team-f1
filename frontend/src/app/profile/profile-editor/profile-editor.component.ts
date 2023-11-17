@@ -72,6 +72,14 @@ export class ProfileEditorComponent implements OnInit {
     }
   }
 
+  agreeToTerms(): void {
+    this.profile.signed_agreement = true;
+    this.profileService.put(this.profile).subscribe({
+      next: (user) => this.onSuccess(user),
+      error: (err) => this.onError(err)
+    });
+  }
+
   private onSuccess(profile: Profile) {
     this.snackBar.open('Profile Saved', '', { duration: 2000 });
   }
@@ -92,14 +100,13 @@ export class ProfileEditorComponent implements OnInit {
     });
   }
 
-  agreeToTerms(event: any) {
-    // Your logic when the checkbox state changes
-    if (event.checked) {
-      console.log('Checkbox is checked');
-      // Call your function or perform any action here
-    } else {
-      console.log('Checkbox is unchecked');
-      // Handle the unchecked state if needed
-    }
-  }
+  //   agreeToTerms(event: any) {
+  //     // Your logic when the checkbox state changes
+  //     if (event.checked) {
+  //       console.log('Checkbox is checked');
+  //     } else {
+  //       console.log('Checkbox is unchecked');
+  //       // Handle the unchecked state if needed
+  //     }
+  //   }
 }

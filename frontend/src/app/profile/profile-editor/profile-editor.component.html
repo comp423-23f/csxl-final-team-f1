@@ -70,7 +70,7 @@
     </mat-card>
   </div>
 
-  <mat-card *ngIf="profile.id" appearance="outlined" class="liability-agreement">
+  <mat-card *ngIf="profile.id" appearance="outlined" class="liabilityForm">
     <mat-card-title>Equipment Reservation Liability Agreement</mat-card-title>
     <mat-card-subtitle id="liability-text">
       This Equipment Reservation Liability Agreement ("Agreement") is entered into by and between the undersigned
@@ -115,6 +115,8 @@
       By signing below, Reserver acknowledges that they have read, understood, and agree to abide by the terms and
       conditions of this Equipment Reservation Liability Agreement.
     </mat-card-subtitle>
-    <mat-checkbox (change)="agreeToTerms($event)">I accept and agree to the terms of use</mat-checkbox>
+    <mat-checkbox [checked]="profile.signed_agreement" [disabled]="profile.signed_agreement" (change)="agreeToTerms()">
+      I accept and agree to the terms of use
+    </mat-checkbox>
   </mat-card>
 </div>
