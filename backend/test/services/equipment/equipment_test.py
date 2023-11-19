@@ -18,12 +18,7 @@ from ..fixtures import equipment_svc_integration
 from ..core_data import setup_insert_data_fixture
 
 # Data Models for Fake Data Inserted in Setup
-from .equipment_test_data import (
-    equipment,
-    to_add,
-    vr1,
-    new_vr1,
-)
+from .equipment_test_data import equipment, to_add, vr1, new_vr1, invalidTester
 from ..user_data import root, user
 
 # Test Functions
@@ -48,6 +43,13 @@ def test_get_from_id(equipment_svc_integration: EquipmentService):
     assert fetched_equipment is not None
     assert isinstance(fetched_equipment, Equipment)
     assert fetched_equipment.id == vr1.id
+
+
+def test_get_from_id_error(equipment_svc_integration: EquipmentService):
+    """Test that equipment with invalid ID cannot be retrieved."""
+    with pytest.raises(EquipmentNotFoundException):
+        fetched_equipment = equipment_svc_integration.get_from_id(99999)
+        pytest.fail()
 
 
 # Test `EquipmentService.create()`
@@ -82,6 +84,15 @@ def test_create_equipment_as_user(equipment_svc_integration: EquipmentService):
         pytest.fail()  # Fail test if no error was thrown above
 
 
+def test_create_equipment_as_root_repeat_id(
+    equipment_svc_integration: EquipmentService,
+):
+    """Test that any the root user cannot crate new equipment with an ID that is already in the system."""
+    with pytest.raises(UserPermissionException):
+        equipment_svc_integration.create(user, vr1)
+        pytest.fail()  # Fail test if no error was thrown above
+
+
 # Test `EquipmentService.update()`
 def test_update_equipment_as_root(
     equipment_svc_integration: EquipmentService,
@@ -95,6 +106,16 @@ def test_update_equipment_as_user(equipment_svc_integration: EquipmentService):
     """Test that any user is *unable* to update new equipment."""
     with pytest.raises(UserPermissionException):
         equipment_svc_integration.update(user, new_vr1)
+        pytest.fail()
+
+
+def test_update_equipment_as_root_invalid_id(
+    equipment_svc_integration: EquipmentService,
+):
+    """Test that the root user is *unable* to update an equipment with an invalid id."""
+    with pytest.raises(UserPermissionException):
+        equipment_svc_integration.update(user, invalidTester)
+        pytest.fail()
 
 
 def test_delete_enforces_permission(equipment_svc_integration: EquipmentService):
@@ -117,9 +138,20 @@ def test_delete_equipment_as_root(equipment_svc_integration: EquipmentService):
     equipment_svc_integration.delete(root, 1)
     with pytest.raises(EquipmentNotFoundException):
         equipment_svc_integration.get_from_id(1)
+        pytest.fail()
 
 
 def test_delete_equipment_as_user(equipment_svc_integration: EquipmentService):
     """Test that any user is *unable* to delete equipment."""
     with pytest.raises(UserPermissionException):
         equipment_svc_integration.delete(user, 1)
+        pytest.fail()
+
+
+def test_delete_equipment_as_root_invalid_id(
+    equipment_svc_integration: EquipmentService,
+):
+    """Test that the root user is *unable* to delete an equipment with an invalid ID."""
+    with pytest.raises(UserPermissionException):
+        equipment_svc_integration.delete(user, 99999)
+        pytest.fail()
