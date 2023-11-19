@@ -32,7 +32,7 @@ import { EquipmentRoutingModule } from './equipment-routing.module';
 import { EquipmentFilterPipe } from './equipment-filter/equipment-filter.pipe';
 
 /* UI Widgets */
-import { EquipmentCard } from './widgets/equipment-card/equipment-card.widget';
+import { EquipmentCardWidget } from './widgets/equipment-card/equipment-card.widget';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 
@@ -44,7 +44,7 @@ import { SharedModule } from '../shared/shared.module';
     EquipmentFilterPipe,
 
     // UI Widgets
-    EquipmentCard
+    EquipmentCardWidget
   ],
   imports: [
     CommonModule,

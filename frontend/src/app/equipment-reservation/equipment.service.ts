@@ -3,7 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from '../authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
-import { Equipment } from './equipment.model';
+
+export interface Equipment {
+  id: number | null;
+  name: string;
+  reservable: boolean;
+  image: string;
+}
 
 @Injectable({
   providedIn: 'root'

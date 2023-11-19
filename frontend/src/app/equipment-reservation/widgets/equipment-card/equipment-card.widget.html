@@ -33,7 +33,8 @@
       <button
         mat-raised-button
         [style.background-color]="'rgb(71, 134, 198)'"
-        [disabled]="!equipment.reservable">
+        [disabled]="!equipment.reservable"
+        (click)="reserveEquipment()">
         Reserve
       </button>
     </a>
