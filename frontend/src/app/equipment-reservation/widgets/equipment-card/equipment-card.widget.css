@@ -88,6 +88,14 @@ mat-card-actions {
   padding: 0;
 }
 
+.mat-icon.reservable {
+  color: rgb(0, 255, 0);
+}
+
+.mat.icon.unreservable {
+  color: red;
+}
+
 /* Override Mat UI's preset z-index for button */
 .mat-mdc-outlined-button {
   z-index: 0 !important;
