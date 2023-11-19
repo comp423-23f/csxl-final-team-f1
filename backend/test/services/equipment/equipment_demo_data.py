@@ -25,7 +25,7 @@ vr2 = Equipment(
 vr3 = Equipment(
     id=3,
     name="VR Headset 3",
-    reservable=True,
+    reservable=False,
     image="https://s7d1.scene7.com/is/image/dmqualcommprod/meta-quest-3-4?$QC_Responsive$&fmt=png-alpha",
 )
 
@@ -39,7 +39,7 @@ vr4 = Equipment(
 keyboard1 = Equipment(
     id=5,
     name="Keyboard 1",
-    reservable=True,
+    reservable=False,
     image="https://pngimg.com/uploads/keyboard/keyboard_PNG101845.png",
 )
 
@@ -74,7 +74,7 @@ mouse1 = Equipment(
 mouse2 = Equipment(
     id=10,
     name="Mouse 2",
-    reservable=True,
+    reservable=False,
     image="https://purepng.com/public/uploads/large/one-rat-p5i.png",
 )
 
