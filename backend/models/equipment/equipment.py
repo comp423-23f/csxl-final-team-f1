@@ -11,8 +11,6 @@ class Equipment(EquipmentIdentity, BaseModel):
     id: int
     name: str
     image: str
-    reservable: bool
-    description: str
 
 
 class NewEquipment(Equipment, BaseModel):
