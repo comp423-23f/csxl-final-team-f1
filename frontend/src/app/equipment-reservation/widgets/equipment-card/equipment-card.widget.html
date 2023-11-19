@@ -18,17 +18,13 @@
   <mat-card-actions class="links">
     <!-- Link to Individual Equipment Page -->
     <a class="" [routerLink]="['/equipment', equipment.id]">
-      <button mat-raised-button color="primary">Reserve</button>
+      <button mat-raised-button [style.background-color]="'rgb(71, 134, 198)'" [disabled]="!equipment.reservable">
+        Reserve
+      </button>
       <!-- Badge to show availability -->
-      <mat-badge
-        *ngIf="equipment.reservable"
-        matBadgeColor="accent"
-        matBadge="1"></mat-badge>
+      <mat-icon *ngIf="equipment.reservable" class="reservable">circle</mat-icon>
 
-      <mat-badge
-        *ngIf="!equipment.reservable"
-        matBadgeColor="warn"
-        matBadge="0"></mat-badge>
+      <mat-icon *ngIf="!equipment.reservable" class="unreservable">circle</mat-icon>
     </a>
   </mat-card-actions>
 </mat-card>

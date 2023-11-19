@@ -21,7 +21,7 @@ class EquipmentEntity(EntityBase):
     name: Mapped[str] = mapped_column(String, nullable=False, default="")
     # Availability of the device
     reservable: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
-
+    # Image link to represent the equipment on card
     image: Mapped[str] = mapped_column(String, nullable=True, default="")
 
     @classmethod
