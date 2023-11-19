@@ -21,6 +21,8 @@ class EquipmentEntity(EntityBase):
     name: Mapped[str] = mapped_column(String, nullable=False, default="")
     # Availability of the device
     reservable: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    # Image link to represent the equipment on card
+    image: Mapped[str] = mapped_column(String, nullable=True, default="")
 
     @classmethod
     def from_model(cls, model: Equipment) -> Self:
@@ -36,6 +38,7 @@ class EquipmentEntity(EntityBase):
             id=model.id,
             name=model.name,
             reservable=model.reservable,
+            image=model.image,
         )
 
     def to_model(self) -> Equipment:
@@ -49,4 +52,5 @@ class EquipmentEntity(EntityBase):
             id=self.id,
             name=self.name,
             reservable=self.reservable,
+            image=self.image,
         )

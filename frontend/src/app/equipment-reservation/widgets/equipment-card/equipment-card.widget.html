@@ -6,10 +6,13 @@
     <div class="left-container">
       <!-- Equipment Name -->
       <mat-card-title class="name" [matTooltip]="equipment.name" matTooltipPosition="above">
-        {{ equipment.name }}
-      </mat-card-title>
+        {{ equipment.name }} </mat-card-title>
     </div>
   </mat-card-header>
+
+  <mat-card-content class="content">
+    <img mat-card-image src="{{ equipment.image }}" class="image" />
+  </mat-card-content>
 
   <!-- Equipment Links & Details -->
   <mat-card-actions class="links">
@@ -22,7 +25,6 @@
       <mat-icon *ngIf="equipment.reservable" class="reservable">circle</mat-icon>
 
       <mat-icon *ngIf="!equipment.reservable" class="unreservable">circle</mat-icon>
-
     </a>
   </mat-card-actions>
 </mat-card>
