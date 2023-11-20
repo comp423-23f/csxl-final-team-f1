@@ -39,8 +39,7 @@ mat-card {
 .left-container {
   display: flex;
   width: 100%;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: space-between;
 }
 
 .name {
@@ -79,6 +78,14 @@ mat-card {
 
 mat-card-actions {
   padding: 0;
+}
+
+.mat-icon.reservable {
+  color: rgb(0, 255, 0);
+}
+
+.mat.icon.unreservable {
+  color: red;
 }
 
 /* Override Mat UI's preset z-index for button */

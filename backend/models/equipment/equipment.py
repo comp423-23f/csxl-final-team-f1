@@ -10,6 +10,7 @@ class EquipmentIdentity(BaseModel):
 class Equipment(EquipmentIdentity, BaseModel):
     id: int
     name: str
+    reservable: bool
     image: str
 
 

@@ -11,4 +11,5 @@ class Equipment(BaseModel):
 
     id: int | None = None
     name: str
+    reservable: bool
     image: str
