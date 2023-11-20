@@ -5,8 +5,6 @@ import { AppTitleStrategy } from './app-title.strategy';
 import { GateComponent } from './gate/gate.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileEditorComponent } from './profile/profile-editor/profile-editor.component';
-import { CoworkingPageComponent } from './coworking/coworking-home/coworking-home.component';
-import { AmbassadorPageComponent } from './coworking/ambassador-home/ambassador-home.component';
 import { AboutComponent } from './about/about.component';
 import { EquipmentPageComponent } from './equipment-reservation/equipment-page/equipment-page.component';
 
@@ -15,8 +13,6 @@ const routes: Routes = [
   AboutComponent.Route,
   ProfileEditorComponent.Route,
   GateComponent.Route,
-  CoworkingPageComponent.Route,
-  AmbassadorPageComponent.Route,
   EquipmentPageComponent.Route,
   {
     path: 'coworking',
@@ -64,4 +60,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AppTitleStrategy.Provider]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
