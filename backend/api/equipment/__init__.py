@@ -1,6 +1,6 @@
 from fastapi import Request
 from fastapi.responses import JSONResponse
-from ...services.coworking.reservation import ReservationException
+from ...services.equipment.equipment_reservation import ReservationException
 
 
 # FastAPI Middleware Exception Handler for ReservationExceptions

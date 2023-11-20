@@ -4,62 +4,48 @@ import pytest
 from sqlalchemy import delete
 from sqlalchemy.orm import Session
 from ....entities.equipment import EquipmentEntity
-from ....models.equipment.equipment_details import EquipmentDetails
 from ....models.equipment.equipment import Equipment
 from typing import Sequence
 
 from ..reset_table_id_seq import reset_table_id_seq
-from .room_data import the_xl
 
-__authors__ = ["Kris Jordan"]
-__copyright__ = "Copyright 2023"
-__license__ = "MIT"
 
-vr1 = EquipmentDetails(
+vr1 = Equipment(
     id=1,
     name="VR Headset 1",
     reservable=True,
-    room=the_xl.to_room(),
 )
 
-vr2: Equipment = EquipmentDetails(
+vr2: Equipment = Equipment(
     id=2,
     name="VR Headset 2",
     reservable=False,
-    room=the_xl.to_room(),
 )
 
-vr3 = EquipmentDetails(
+vr3 = Equipment(
     id=3,
     name="VR Headset 3",
     reservable=True,
-    room=the_xl.to_room(),
 )
 
-vr4 = EquipmentDetails(
+vr4 = Equipment(
     id=4,
     name="VR Headset 4",
     reservable=False,
-    room=the_xl.to_room(),
 )
 
-keyboard1 = EquipmentDetails(
-    id=20, name="Keyboard 1", reservable=False, room=the_xl.to_room()
-)
+keyboard1 = Equipment(id=20, name="Keyboard 1", reservable=False)
 
-keyboard2 = EquipmentDetails(
-    id=21, name="Keyboard 2", reservable=False, room=the_xl.to_room()
-)
+keyboard2 = Equipment(id=21, name="Keyboard 2", reservable=False)
 
 keyboards = [keyboard1, keyboard2]
 
-mouse1 = EquipmentDetails(id=40, name="Mouse 1", reservable=True, room=the_xl.to_room())
+mouse1 = Equipment(id=40, name="Mouse 1", reservable=True)
 
-mouse2 = EquipmentDetails(
+mouse2 = Equipment(
     id=41,
     name="Mouse 2",
     reservable=False,
-    room=the_xl.to_room(),
 )
 
 mouses = [mouse1, mouse2]
@@ -75,7 +61,7 @@ unreservable_equipment = [
 ]
 
 
-def insert_fake_data(session: Session):
+def equipment_insert_fake_data(session: Session):
     for x in equipment:
         entity = EquipmentEntity.from_model(x)
         session.add(entity)
@@ -84,7 +70,7 @@ def insert_fake_data(session: Session):
 
 @pytest.fixture(autouse=True)
 def fake_data_fixture(session: Session):
-    insert_fake_data(session)
+    equipment_insert_fake_data(session)
     session.commit()
 
 

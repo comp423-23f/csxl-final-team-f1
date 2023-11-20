@@ -7,35 +7,42 @@ from ..entity_base import EntityBase
 from ...models.equipment import Reservation, ReservationState
 from .equipment_entity import EquipmentEntity
 from ..user_entity import UserEntity
-
-# from .reservation_user_table import reservation_user_table
-# from .reservation_equipment_table import reservation_equipment_table
+from .reservation_user_table import equipment_reservation_user_table
+from .reservation_equipment_table import equipment_reservation_equipment_table
 from typing import Self
 
 
 class ReservationEntity(EntityBase):
-    __tablename__ = "equipment_reservation"
+    __tablename__ = "equipment__reservation"
     __table_args__ = (
         Index("reservation_time_idx", "start", "end", "state", unique=False),
     )
 
     # Reservation Model Fields
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    equipment_id: Mapped[int] = mapped_column(ForeignKey("equipment_id"))
-    user_id: Mapped[int] = mapped_column(ForeignKey("user_id"))
     start: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     end: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     state: Mapped[ReservationState] = mapped_column(String, nullable=False)
+    walkin: Mapped[bool] = mapped_column(Boolean, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.now, nullable=False
     )
     updated_at: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.now, onupdate=datetime.now, nullable=False
     )
+    # user_pid: Mapped[int] = mapped_column(ForeignKey("user.pid"))
+    # equipment_id: Mapped[int] = mapped_column(ForeignKey("equipment.id"))
+
+    # equipment: Mapped["EquipmentEntity"] = relationship(back_populates="registrations")
+    # user: Mapped["UserEntity"] = relationship(back_populates="registrations")
 
     # Relationships
-    user: Mapped[UserEntity] = relationship("UserEntity")
-    equipment: Mapped[list[EquipmentEntity]] = relationship("EquipmentEntity")
+    users: Mapped[list[UserEntity]] = relationship(
+        secondary=equipment_reservation_user_table
+    )
+    equipment: Mapped[list[EquipmentEntity]] = relationship(
+        secondary=equipment_reservation_equipment_table
+    )
 
     def to_model(self) -> Reservation:
         """Converts the entity to a model.
@@ -47,10 +54,11 @@ class ReservationEntity(EntityBase):
             start=self.start,
             end=self.end,
             state=self.state,
-            user=self.user.to_model(),
-            equipment=[equipment.to_model() for equipment in self.equipment],
+            walkin=self.walkin,
             created_at=self.created_at,
             updated_at=self.updated_at,
+            users=[user.to_model() for user in self.users],
+            equipment=[x.to_model() for x in self.equipment],
         )
 
     @classmethod
@@ -68,11 +76,11 @@ class ReservationEntity(EntityBase):
             start=model.start,
             end=model.end,
             state=model.state,
-            user=session.get(UserEntity, id) if session else [],
-            equipment=[
-                session.get(EquipmentEntity, equipment.id)
-                for equipment in model.equipment
-            ]
+            walkin=model.walkin,
+            users=[session.get(UserEntity, user.id) for user in model.users]
+            if session
+            else [],
+            equipment=[session.get(EquipmentEntity, x.id) for x in model.equipment]
             if session
             else [],
             created_at=model.created_at,

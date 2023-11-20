@@ -5,6 +5,7 @@ from typing import Sequence
 
 from .reservation import Reservation
 from .availability import EquipmentAvailability
+from .operating_hours import OperatingHours
 
 
 class Status(BaseModel):
@@ -12,3 +13,4 @@ class Status(BaseModel):
 
     my_reservations: Sequence[Reservation]
     equipment_availability: Sequence[EquipmentAvailability]
+    operating_hours: Sequence[OperatingHours]

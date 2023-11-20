@@ -6,9 +6,11 @@ from sqlalchemy.orm import Session
 from ...database import db_session
 from .equipment_reservation import EquipmentReservationService
 from .equipment import EquipmentService
+from .operating_hours import OperatingHoursService
 from ...models.equipment import Status, TimeRange
 from ...models import User
 from .policy import PolicyService
+from .operating_hours import OperatingHoursService
 
 
 class StatusService:
@@ -17,11 +19,13 @@ class StatusService:
     def __init__(
         self,
         policies_svc: PolicyService = Depends(),
+        operating_hours_svc: OperatingHoursService = Depends(),
         equipment_svc: EquipmentService = Depends(),
         reservation_svc: EquipmentReservationService = Depends(),
     ):
         self._policies_svc = policies_svc
         self._reservation_svc = reservation_svc
+        self._operating_hours_svc = operating_hours_svc
         self._equipment_svc = equipment_svc
 
     def get_equipment_status(self, subject: User) -> Status:
@@ -47,7 +51,14 @@ class StatusService:
             equipment, walkin_window
         )
 
+        operating_hours = self._operating_hours_svc.schedule(
+            TimeRange(
+                start=now, end=now + self._policies_svc.reservation_window(subject)
+            )
+        )
+
         return Status(
             my_reservations=my_reservations,
             equipment_availability=equipment_availability,
+            operating_hours=operating_hours,
         )

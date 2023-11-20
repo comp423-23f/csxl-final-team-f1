@@ -5,13 +5,12 @@ from unittest.mock import create_autospec
 from sqlalchemy.orm import Session
 from ....services import PermissionService
 from ....services.equipment import (
-    OperatingHoursService,
-    RoomService,
     EquipmentService,
-    ReservationService,
+    EquipmentReservationService,
     PolicyService,
     StatusService,
 )
+from ....services.equipment.operating_hours import OperatingHoursService
 
 
 @pytest.fixture()
@@ -27,20 +26,14 @@ def operating_hours_svc(session: Session):
 
 
 @pytest.fixture()
-def room_svc(session: Session):
-    """RoomService fixture."""
-    return RoomService(session)
-
-
-@pytest.fixture()
 def equipment_svc(session: Session):
-    """SeatService fixture."""
+    """EquipmentService fixture."""
     return EquipmentService(session)
 
 
 @pytest.fixture()
 def policy_svc():
-    """CoworkingPolicyService fixture."""
+    """EquipmentPolicyService fixture."""
     return PolicyService()
 
 
@@ -53,7 +46,7 @@ def reservation_svc(
     equipment_svc: EquipmentService,
 ):
     """ReservationService fixture."""
-    return ReservationService(
+    return EquipmentReservationService(
         session, permission_svc, policy_svc, operating_hours_svc, equipment_svc
     )
 
@@ -63,7 +56,7 @@ def status_svc():
     policies_mock = create_autospec(PolicyService)
     operating_hours_mock = create_autospec(OperatingHoursService)
     equipment_mock = create_autospec(EquipmentService)
-    reservation_mock = create_autospec(ReservationService)
+    reservation_mock = create_autospec(EquipmentReservationService)
     return StatusService(
         policies_mock, operating_hours_mock, equipment_mock, reservation_mock
     )

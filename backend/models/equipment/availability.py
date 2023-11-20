@@ -1,20 +1,13 @@
-"""Models for the availability of rooms and seats over a time range."""
+"""Models for the availability of equipment over a time range."""
 
 from pydantic import BaseModel, validator
 
-from .room import Room
 from .equipment import Equipment
 from .time_range import TimeRange
 from .availability_list import AvailabilityList
 
 
-class RoomAvailability(Room, AvailabilityList):
-    """A room that is available for a given time range."""
-
-    ...
-
-
 class EquipmentAvailability(Equipment, AvailabilityList, BaseModel):
-    """A seat that is available for a given time range."""
+    """A equipment that is available for a given time range."""
 
     ...

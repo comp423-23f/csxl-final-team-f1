@@ -53,6 +53,11 @@ class UserEntity(EntityBase):
     # NOTE: This field establishes a one-to-many relationship between the permission and users table.
     permissions: Mapped["PermissionEntity"] = relationship(back_populates="user")
 
+    # Relationship Fields
+    # registrations: Mapped[list["EquipmentReservationEntity"]] = relationship(
+    #     back_populates="user", cascade="all,delete"
+    # )
+
     @classmethod
     def from_model(cls, model: User) -> Self:
         """

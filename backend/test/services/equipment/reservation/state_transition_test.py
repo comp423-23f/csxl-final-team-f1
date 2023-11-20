@@ -4,8 +4,8 @@ import pytest
 from unittest.mock import create_autospec
 
 from .....services import PermissionService, UserPermissionException
-from .....services.equipment import ReservationService, PolicyService
-from .....services.equipment.reservation import ReservationException
+from .....services.equipment import EquipmentReservationService, PolicyService
+from .....services.equipment.equipment_reservation import ReservationException
 from .....models.equipment import (
     Reservation,
     TimeRange,
@@ -28,34 +28,31 @@ from ..fixtures import (
     policy_svc,
     operating_hours_svc,
 )
-from ..time import *
+from ..equipment_time import *
 
 # Import the setup_teardown fixture explicitly to load entities in database.
 # The order in which these fixtures run is dependent on their imported alias.
 # Since there are relationship dependencies between the entities, order matters.
 from ...core_data import setup_insert_data_fixture as insert_order_0
-from ..operating_hours_data import fake_data_fixture as insert_order_1
-from ..room_data import fake_data_fixture as insert_order_2
+from ..equipment_operating_hours_data import fake_data_fixture as insert_order_1
 from ..equipment_data import fake_data_fixture as insert_order_3
-from .reservation_data import fake_data_fixture as insert_order_4
+from .equipment_reservation_data import fake_data_fixture as insert_order_4
 
 # Import the fake model data in a namespace for test assertions
 from ...core_data import user_data
-from .. import operating_hours_data
+from .. import equipment_operating_hours_data
 from .. import equipment_data
-from . import reservation_data
-
-__authors__ = ["Kris Jordan"]
-__copyright__ = "Copyright 2023"
-__license__ = "MIT"
+from . import equipment_reservation_data
 
 
 def test_state_transition_reservation_entities_by_time_noop(
-    session: Session, reservation_svc: ReservationService, time: dict[str, datetime]
+    session: Session,
+    reservation_svc: EquipmentReservationService,
+    time: dict[str, datetime],
 ):
     entities: list[ReservationEntity] = [
         session.get(ReservationEntity, reservation.id)
-        for reservation in reservation_data.active_reservations
+        for reservation in equipment_reservation_data.active_reservations
     ]
     collected = reservation_svc._state_transition_reservation_entities_by_time(
         time[NOW], entities
@@ -65,11 +62,11 @@ def test_state_transition_reservation_entities_by_time_noop(
 
 
 def test_state_transition_reservation_entities_by_time_expired_active(
-    session: Session, reservation_svc: ReservationService
+    session: Session, reservation_svc: EquipmentReservationService
 ):
     entities: list[ReservationEntity] = [
         session.get(ReservationEntity, reservation.id)
-        for reservation in reservation_data.active_reservations
+        for reservation in equipment_reservation_data.active_reservations
     ]
     cutoff = entities[0].end
     collected = reservation_svc._state_transition_reservation_entities_by_time(
@@ -82,11 +79,13 @@ def test_state_transition_reservation_entities_by_time_expired_active(
 
 
 def test_state_transition_reservation_entities_by_time_active_draft(
-    session: Session, reservation_svc: ReservationService, policy_svc: PolicyService
+    session: Session,
+    reservation_svc: EquipmentReservationService,
+    policy_svc: PolicyService,
 ):
     entities: list[ReservationEntity] = [
         session.get(ReservationEntity, reservation.id)
-        for reservation in reservation_data.draft_reservations
+        for reservation in equipment_reservation_data.draft_reservations
     ]
     cutoff = entities[0].created_at + policy_svc.reservation_draft_timeout()
     collected = reservation_svc._state_transition_reservation_entities_by_time(
@@ -97,7 +96,9 @@ def test_state_transition_reservation_entities_by_time_active_draft(
 
 
 def test_state_transition_reservation_entities_by_time_expired_draft(
-    session: Session, reservation_svc: ReservationService, policy_svc: PolicyService
+    session: Session,
+    reservation_svc: EquipmentReservationService,
+    policy_svc: PolicyService,
 ):
     policy_mock = create_autospec(PolicyService)
     policy_mock.reservation_draft_timeout.return_value = (
@@ -107,7 +108,7 @@ def test_state_transition_reservation_entities_by_time_expired_draft(
 
     entities: list[ReservationEntity] = [
         session.get(ReservationEntity, reservation.id)
-        for reservation in reservation_data.draft_reservations
+        for reservation in equipment_reservation_data.draft_reservations
     ]
     cutoff = (
         entities[0].created_at
@@ -126,7 +127,9 @@ def test_state_transition_reservation_entities_by_time_expired_draft(
 
 
 def test_state_transition_reservation_entities_by_time_checkin_timeout(
-    session: Session, reservation_svc: ReservationService, policy_svc: PolicyService
+    session: Session,
+    reservation_svc: EquipmentReservationService,
+    policy_svc: PolicyService,
 ):
     policy_mock = create_autospec(PolicyService)
     policy_mock.reservation_checkin_timeout.return_value = (
@@ -136,7 +139,7 @@ def test_state_transition_reservation_entities_by_time_checkin_timeout(
 
     entities: list[ReservationEntity] = [
         session.get(ReservationEntity, reservation.id)
-        for reservation in reservation_data.confirmed_reservations
+        for reservation in equipment_reservation_data.confirmed_reservations
     ]
     cutoff = (
         entities[0].start

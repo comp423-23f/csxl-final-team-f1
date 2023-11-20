@@ -7,12 +7,12 @@ from .....entities.equipment import ReservationEntity
 from .....models.equipment import Reservation, ReservationState, ReservationRequest
 from .....models.user import UserIdentity
 from .....models.equipment.equipment import EquipmentIdentity
-from ..time import *
+from ..equipment_time import *
 
 from ...core_data import user_data
 from ...reset_table_id_seq import reset_table_id_seq
 from .. import equipment_data
-from .. import operating_hours_data
+from .. import equipment_operating_hours_data
 
 
 # Active reservation for 00 starts 30 minutes ago, ends in an hour
@@ -43,7 +43,6 @@ def instantiate_global_models(time: dict[str, datetime]):
         created_at=time[THIRTY_MINUTES_AGO],
         updated_at=time[THIRTY_MINUTES_AGO],
         walkin=False,
-        room=None,
         state=ReservationState.CHECKED_IN,
         users=[user_data.user],
         equipment=[equipment_data.vr1],
@@ -57,7 +56,6 @@ def instantiate_global_models(time: dict[str, datetime]):
         created_at=time[THIRTY_MINUTES_AGO],
         updated_at=time[THIRTY_MINUTES_AGO],
         walkin=False,
-        room=None,
         state=ReservationState.CHECKED_OUT,
         users=[user_data.ambassador],
         equipment=[equipment_data.vr2],
@@ -71,7 +69,6 @@ def instantiate_global_models(time: dict[str, datetime]):
         created_at=time[THIRTY_MINUTES_AGO],
         updated_at=time[THIRTY_MINUTES_AGO],
         walkin=False,
-        room=None,
         state=ReservationState.CANCELLED,
         users=[user_data.root],
         equipment=[equipment_data.vr3],
@@ -80,12 +77,11 @@ def instantiate_global_models(time: dict[str, datetime]):
     # Future reservations for a half-hour toward end of day, with half hour til close
     reservation_4 = Reservation(
         id=4,
-        start=operating_hours_data.today.end - ONE_HOUR,
-        end=operating_hours_data.today.end - THIRTY_MINUTES,
+        start=equipment_operating_hours_data.today.end - ONE_HOUR,
+        end=equipment_operating_hours_data.today.end - THIRTY_MINUTES,
         created_at=time[NOW],
         updated_at=time[NOW],
         walkin=False,
-        room=None,
         state=ReservationState.CONFIRMED,
         users=[user_data.root, user_data.ambassador],
         equipment=[
@@ -97,12 +93,11 @@ def instantiate_global_models(time: dict[str, datetime]):
     # Draft future reservation
     reservation_5 = Reservation(
         id=5,
-        start=operating_hours_data.tomorrow.start,
-        end=operating_hours_data.tomorrow.end,
+        start=equipment_operating_hours_data.tomorrow.start,
+        end=equipment_operating_hours_data.tomorrow.end,
         created_at=time[NOW],
         updated_at=time[NOW],
         walkin=False,
-        room=None,
         state=ReservationState.DRAFT,
         users=[user_data.user],
         equipment=[equipment_data.reservable_equipment[0]],
@@ -139,11 +134,11 @@ def test_request(overrides: dict | None = None) -> ReservationRequest:
 
 @pytest.fixture(autouse=True)
 def fake_data_fixture(session: Session, time: dict[str, datetime]):
-    insert_fake_data(session, time)
+    equipment_insert_fake_data(session, time)
     session.commit()
 
 
-def insert_fake_data(session: Session, time: dict[str, datetime]):
+def equipment_insert_fake_data(session: Session, time: dict[str, datetime]):
     instantiate_global_models(time)
 
     for reservation in reservations:

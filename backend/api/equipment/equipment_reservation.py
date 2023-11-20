@@ -4,7 +4,7 @@ This API is used to make and manage reservations."""
 
 from fastapi import APIRouter, Depends, HTTPException
 from ..authentication import registered_user
-from ...services.equipment.reservation import ReservationService
+from ...services.equipment.equipment_reservation import EquipmentReservationService
 from ...models import User
 from ...models.equipment import (
     Reservation,
@@ -24,7 +24,7 @@ openapi_tags = {
 def draft_reservation(
     reservation_request: ReservationRequest,
     subject: User = Depends(registered_user),
-    reservation_svc: ReservationService = Depends(),
+    reservation_svc: EquipmentReservationService = Depends(),
 ) -> Reservation:
     """Draft a reservation request."""
     return reservation_svc.draft_reservation(subject, reservation_request)
@@ -34,7 +34,7 @@ def draft_reservation(
 def get_reservation(
     id: int,
     subject: User = Depends(registered_user),
-    reservation_svc: ReservationService = Depends(),
+    reservation_svc: EquipmentReservationService = Depends(),
 ) -> Reservation:
     return reservation_svc.get_reservation(subject, id)
 
@@ -43,7 +43,7 @@ def get_reservation(
 def update_reservation(
     reservation: ReservationPartial,
     subject: User = Depends(registered_user),
-    reservation_svc: ReservationService = Depends(),
+    reservation_svc: EquipmentReservationService = Depends(),
 ) -> Reservation:
     """Modify a reservation."""
     return reservation_svc.change_reservation(subject, reservation)
@@ -53,7 +53,7 @@ def update_reservation(
 def cancel_reservation(
     id: int,
     subject: User = Depends(registered_user),
-    reservation_svc: ReservationService = Depends(),
+    reservation_svc: EquipmentReservationService = Depends(),
 ) -> Reservation:
     """Cancel a reservation."""
     return reservation_svc.change_reservation(

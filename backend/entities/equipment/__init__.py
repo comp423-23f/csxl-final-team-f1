@@ -1,3 +1,4 @@
+from .operating_hours_entity import OperatingHoursEntity
 from .equipment_entity import EquipmentEntity
 from .equipment_reservation_entity import ReservationEntity
 

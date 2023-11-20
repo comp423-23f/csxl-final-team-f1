@@ -1,7 +1,7 @@
 from .equipment import Equipment
 
 from .time_range import TimeRange
-
+from .operating_hours import OperatingHours
 
 from .reservation import (
     Reservation,
@@ -17,8 +17,6 @@ from .availability import EquipmentAvailability
 from .status import Status
 
 __all__ = [
-    "Room",
-    "RoomDetails",
     "Equipment",
     "EquipmentDetails",
     "TimeRange",
@@ -29,7 +27,6 @@ __all__ = [
     "ReservationPartial",
     "ReservationIdentity",
     "AvailabilityList",
-    "RoomAvailability",
     "EquipmentAvailability",
     "Status",
 ]

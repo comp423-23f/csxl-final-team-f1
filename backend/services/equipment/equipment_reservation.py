@@ -18,6 +18,7 @@ from ...models.equipment import (
     ReservationState,
     AvailabilityList,
 )
+from ...models.equipment.operating_hours import OperatingHours
 from ...entities import UserEntity
 from ...entities.equipment import ReservationEntity, EquipmentEntity
 from .equipment import EquipmentService
@@ -32,7 +33,7 @@ class ReservationException(Exception):
 
 
 class EquipmentReservationService:
-    """ReservationService is the access layer to managing reservations for equipment."""
+    """ReservationService is the access layer to managing reservations for equipment and rooms."""
 
     def __init__(
         self,
@@ -166,7 +167,7 @@ class EquipmentReservationService:
                 ReservationEntity.state.not_in(
                     [ReservationState.CANCELLED, ReservationState.CHECKED_OUT]
                 ),
-                EquipmentEntity.id.in_([equipment.id for equipment in equipment]),
+                EquipmentEntity.id.in_([x.id for x in equipment]),
             )
             .options(
                 joinedload(ReservationEntity.equipment),
@@ -413,7 +414,7 @@ class EquipmentReservationService:
         #                 "Users may not have conflicting reservations."
         #             )
 
-        # Look at the equipment - match bounds of assigned equipment availability
+        # Look at the equipment - match bounds of assigned equipment's availability
         # TODO: Fetch all equipment
         equipment: list[Equipment] = EquipmentEntity.get_models_from_identities(
             self._session, request.equipment
@@ -421,15 +422,11 @@ class EquipmentReservationService:
         equipment_availability = self.equipment_availability(equipment, bounds)
 
         if not is_walkin:
-            equipment_availability = [
-                equipment
-                for equipment in equipment_availability
-                if equipment.reservable
-            ]
+            equipment_availability = [x for x in equipment_availability if x.reservable]
 
         if len(equipment_availability) == 0:
             raise ReservationException(
-                "The requested equipment are no longer available."
+                "The requested equipment(s) are no longer available."
             )
 
         # TODO (limit to # of users on request if multiple users)
@@ -650,12 +647,12 @@ class EquipmentReservationService:
         self, equipment: Sequence[Equipment], availability: AvailabilityList
     ) -> dict[int, EquipmentAvailability]:
         return {
-            equipment.id: EquipmentAvailability(
+            x.id: EquipmentAvailability(
                 availability=availability.model_copy(deep=True).availability,
-                **equipment.model_dump(),
+                **x.model_dump(),
             )
-            for equipment in equipment
-            if equipment.id is not None
+            for x in equipment
+            if x.id is not None
         }
 
     def _remove_reservations_from_availability(
@@ -665,9 +662,9 @@ class EquipmentReservationService:
     ):
         for reservation in reservations:
             if len(reservation.equipment) > 0:
-                for equipment in reservation.equipment:
-                    if equipment.id in equipment_availability_dict:
-                        equipment_availability_dict[equipment.id].subtract(reservation)
+                for x in reservation.equipment:
+                    if x.id in equipment_availability_dict:
+                        equipment_availability_dict[x.id].subtract(reservation)
 
     def _prune_equipment_below_availability_threshold(
         self, equipment: Sequence[EquipmentAvailability], threshold: timedelta

@@ -23,7 +23,7 @@ def get_equipment_status(
     """Status endpoint supports the primary screen of the equipment features.
 
     It returns information about upcoming, active reservations the subject holds.
-    It also fetches the current seat availability of the XL during operating hours.
+    It also fetches the current equipment availability of the XL during operating hours.
     Finally, it provides a list of upcoming hours.
     """
     return status_svc.get_equipment_status(subject)

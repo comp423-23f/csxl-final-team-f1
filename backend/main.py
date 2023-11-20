@@ -5,7 +5,7 @@ from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
-from .api.equipment import equipment
+from .api.equipment import equipment_reservation, status, ambassador  # Ours
 from .api import (
     events,
     health,
@@ -37,10 +37,9 @@ app = FastAPI(
         profile.openapi_tags,
         user.openapi_tags,
         organizations.openapi_tags,
-        equipment.openapi_tags,
         events.openapi_tags,
         reservation.openapi_tags,
-        reservation.openapi_tags,
+        equipment_reservation.openapi_tags,  # Ours
         health.openapi_tags,
         admin_users.openapi_tags,
         admin_roles.openapi_tags,
@@ -50,12 +49,12 @@ app = FastAPI(
 # Plugging in each of the router APIs
 feature_apis = [
     status,
+    equipment_reservation,  # Ours
     reservation,
     events,
     user,
     profile,
     organizations,
-    equipment,
     health,
     ambassador,
     authentication,

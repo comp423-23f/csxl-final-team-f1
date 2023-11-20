@@ -3,7 +3,7 @@
 import pytest, json
 from pydantic import ValidationError
 from ....models.equipment import TimeRange
-from ...services.equipment.time import *
+from ...services.equipment.equipment_time import *
 
 
 def test_initialization(time: dict[str, datetime]):

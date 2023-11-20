@@ -1,4 +1,4 @@
-"""Seat models a physical working space in the equipment space."""
+"""Equipment models a physical working space in the equipment space."""
 
 from pydantic import BaseModel
 
