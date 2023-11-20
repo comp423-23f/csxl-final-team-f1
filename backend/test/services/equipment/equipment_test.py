@@ -49,13 +49,11 @@ def test_get_from_id(equipment_svc_integration: EquipmentService):
     assert isinstance(fetched_equipment, Equipment)
     assert fetched_equipment.id == vr1.id
 
-
 def test_get_from_id_error(equipment_svc_integration: EquipmentService):
     """Test that equipment with invalid ID cannot be retrieved."""
     with pytest.raises(EquipmentNotFoundException):
         fetched_equipment = equipment_svc_integration.get_from_id(99999)
         pytest.fail()
-
 
 # Test `EquipmentService.create()`
 
@@ -97,7 +95,7 @@ def test_create_equipment_as_root_repeat_id(
         equipment_svc_integration.create(user, vr1)
         pytest.fail()  # Fail test if no error was thrown above
 
-
+        
 # Test `EquipmentService.update()`
 def test_update_equipment_as_root(
     equipment_svc_integration: EquipmentService,

@@ -62,7 +62,7 @@ export class EquipmentCardWidget implements OnInit {
   /** @deprecated Stores the permission values for a profile */
   @Input() profilePermissions!: Map<number, number>;
 
-  constructor(
+ constructor(
     route: ActivatedRoute,
     protected equipmentService: EquipmentReservationService,
     protected snackBar: MatSnackBar
