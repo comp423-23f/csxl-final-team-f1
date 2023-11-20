@@ -48,6 +48,7 @@ export class ProfileEditorComponent implements OnInit {
     form.get('pronouns')?.addValidators(Validators.required);
 
     const data = route.snapshot.data as { profile: Profile };
+    console.log(data.profile);
     this.profile = data.profile;
   }
 
@@ -72,6 +73,14 @@ export class ProfileEditorComponent implements OnInit {
     }
   }
 
+  agreeToTerms(): void {
+    this.profile.signed_agreement = true;
+    this.profileService.put(this.profile).subscribe({
+      next: (user) => this.onSuccess(user),
+      error: (err) => this.onError(err)
+    });
+  }
+
   private onSuccess(profile: Profile) {
     this.snackBar.open('Profile Saved', '', { duration: 2000 });
   }
@@ -91,4 +100,14 @@ export class ProfileEditorComponent implements OnInit {
       next: () => (this.profile.github = '')
     });
   }
+
+  //   agreeToTerms(event: any) {
+  //     // Your logic when the checkbox state changes
+  //     if (event.checked) {
+  //       console.log('Checkbox is checked');
+  //     } else {
+  //       console.log('Checkbox is unchecked');
+  //       // Handle the unchecked state if needed
+  //     }
+  //   }
 }

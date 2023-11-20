@@ -1,67 +1,122 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <mat-card appearance="outlined">
-    <mat-card-header *ngIf="profile.id; else registration">
-      <mat-card-title>Update your Profile</mat-card-title>
-    </mat-card-header>
-    <ng-template #registration>
-      <mat-card-header>
-        <mat-card-title>Welcome to CSXL! Please verify and complete your profile
-          below.</mat-card-title>
-        <mat-card-subtitle>
-          Once your profile is setup you will be able to take advantage of CSXL
-          initiatives such as enrolling in workshops, reserving a desk during
-          coworking hours, and more!
-        </mat-card-subtitle>
-      </mat-card-header>
-    </ng-template>
-    <mat-card-content>
-      <mat-form-field appearance="outline">
-        <mat-label>First Name</mat-label>
-        <input matInput placeholder="Jane" formControlName="first_name" name="first_name" required />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Last Name</mat-label>
-        <input matInput placeholder="Doe" formControlName="last_name" name="last_name" required />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>UNC Email</mat-label>
-        <input matInput type="email" placeholder="jane.doe@unc.edu" formControlName="email" name="email" required />
-        <mat-error *ngIf="profileForm.value.email">Must provide a valid UNC email address.</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Pronouns</mat-label>
-        <input matInput placeholder="she / her / hers" formControlName="pronouns" name="pronouns" required />
-      </mat-form-field>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-stroked-button type="submit" [disabled]="profileForm.invalid">
-        SAVE
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</form>
+<!-- eslint-disable prettier/prettier -->
+<div class="page-content">
+  <div>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <mat-card appearance="outlined">
+        <mat-card-header *ngIf="profile.id; else registration">
+          <mat-card-title>Update your Profile</mat-card-title>
+        </mat-card-header>
+        <ng-template #registration>
+          <mat-card-header>
+            <mat-card-title>Welcome to CSXL! Please verify and complete your profile
+              below.</mat-card-title>
+            <mat-card-subtitle>
+              Once your profile is setup you will be able to take advantage of CSXL
+              initiatives such as enrolling in workshops, reserving a desk during
+              coworking hours, and more!
+            </mat-card-subtitle>
+          </mat-card-header>
+        </ng-template>
+        <mat-card-content>
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="Jane" formControlName="first_name" name="first_name" required />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Doe" formControlName="last_name" name="last_name" required />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>UNC Email</mat-label>
+            <input matInput type="email" placeholder="jane.doe@unc.edu" formControlName="email" name="email" required />
+            <mat-error *ngIf="profileForm.value.email">Must provide a valid UNC email address.</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Pronouns</mat-label>
+            <input matInput placeholder="she / her / hers" formControlName="pronouns" name="pronouns" required />
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-stroked-button type="submit" [disabled]="profileForm.invalid">
+            SAVE
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
 
-<mat-card *ngIf="profile.id" appearance="outlined">
-  <div *ngIf="profile.github !== ''; else associate_github">
-    <mat-card-header>
-      <img mat-card-avatar [src]="profile.github_avatar" />
-      <mat-card-title>GitHub /
-        <a href="https://github.com/{{ profile.github }}" target="_blank">{{
-          profile.github
-          }}</a></mat-card-title>
-    </mat-card-header>
-    <mat-card-actions>
-      <button mat-stroked-button (click)="unlinkGitHub()">Unlink GitHub</button>
-    </mat-card-actions>
+    <mat-card *ngIf="profile.id" appearance="outlined">
+      <div *ngIf="profile.github !== ''; else associate_github">
+        <mat-card-header>
+          <img mat-card-avatar [src]="profile.github_avatar" />
+          <mat-card-title>GitHub /
+            <a href="https://github.com/{{ profile.github }}" target="_blank">{{
+              profile.github
+              }}</a></mat-card-title>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-stroked-button (click)="unlinkGitHub()">Unlink GitHub</button>
+        </mat-card-actions>
+      </div>
+      <ng-template #associate_github>
+        <mat-card-header>
+          <mat-card-title>Link Your GitHub Account</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-stroked-button (click)="linkWithGitHub()">
+            Link with GitHub
+          </button>
+        </mat-card-actions>
+      </ng-template>
+    </mat-card>
   </div>
-  <ng-template #associate_github>
-    <mat-card-header>
-      <mat-card-title>Link Your GitHub Account</mat-card-title>
-    </mat-card-header>
-    <mat-card-actions>
-      <button mat-stroked-button (click)="linkWithGitHub()">
-        Link with GitHub
-      </button>
-    </mat-card-actions>
-  </ng-template>
-</mat-card>
+
+  <mat-card *ngIf="profile.id" appearance="outlined" class="liabilityForm">
+    <mat-card-title>Equipment Reservation Liability Agreement</mat-card-title>
+    <mat-card-subtitle id="liability-text">
+      This Equipment Reservation Liability Agreement ("Agreement") is entered into by and between the undersigned
+      individual ("Reserver") and [Your Organization/Company Name], collectively referred to as the "Parties."
+
+      1. Equipment Description:
+      Reserver agrees to reserve the following equipment: [List the equipment details, including quantity and
+      specifications].
+
+      2. Purpose of Reservation:
+      The reserved equipment shall be used solely for the purpose of [Specify the purpose, e.g., academic projects,
+      research, etc.]. Any use outside the agreed-upon purpose requires prior written consent.
+
+      3. Assumption of Responsibility:
+      Reserver acknowledges and agrees to assume full responsibility for the proper and safe use of the reserved
+      equipment. This includes compliance with all applicable laws, regulations, and safety guidelines.
+
+      4. Care and Maintenance:
+      Reserver agrees to exercise due care and diligence in using the equipment and to return it in the same condition
+      as received. Any damage or loss occurring during the reservation period shall be the responsibility of the
+      Reserver.
+
+      5. Indemnification:
+      Reserver agrees to indemnify and hold [Your Organization/Company Name] harmless from any claims, liabilities,
+      damages, or expenses arising out of or related to the use of the reserved equipment.
+
+      6. Reservation Period:
+      The reservation period is from [start date] to [end date]. Any extension of the reservation period requires prior
+      written approval.
+
+      7. Reservation Cancellation:
+      Reserver agrees to provide reasonable notice for the cancellation of the reservation. Failure to do so may result
+      in forfeiture of reservation privileges.
+
+      8. Termination of Reservation:
+      [Your Organization/Company Name] reserves the right to terminate the reservation at any time due to misuse,
+      non-compliance, or violation of this Agreement.
+
+      9. Governing Law:
+      This Agreement shall be governed by and construed in accordance with the laws of [Your Jurisdiction].
+
+      By signing below, Reserver acknowledges that they have read, understood, and agree to abide by the terms and
+      conditions of this Equipment Reservation Liability Agreement.
+    </mat-card-subtitle>
+    <mat-checkbox [checked]="profile.signed_agreement" [disabled]="profile.signed_agreement" (change)="agreeToTerms()">
+      I accept and agree to the terms of use
+    </mat-checkbox>
+  </mat-card>
+</div>
