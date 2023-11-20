@@ -52,20 +52,22 @@ mouses = [mouse1, mouse2]
 
 vr_headsets = [vr1, vr2, vr3, vr4]
 
-equipment: Sequence[Equipment] = vr_headsets + keyboards + mouses
+equipments: Sequence[Equipment] = vr_headsets + keyboards + mouses
 
-reservable_equipment = [equipment for equipment in equipment if equipment.reservable]
+reservable_equipment = [equipment for equipment in equipments if equipment.reservable]
 
 unreservable_equipment = [
-    equipment for equipment in equipment if not equipment.reservable
+    equipment for equipment in equipments if not equipment.reservable
 ]
 
 
 def equipment_insert_fake_data(session: Session):
-    for x in equipment:
+    for x in equipments:
         entity = EquipmentEntity.from_model(x)
         session.add(entity)
-    reset_table_id_seq(session, EquipmentEntity, EquipmentEntity.id, len(equipment) + 1)
+    reset_table_id_seq(
+        session, EquipmentEntity, EquipmentEntity.id, len(equipments) + 1
+    )
 
 
 @pytest.fixture(autouse=True)

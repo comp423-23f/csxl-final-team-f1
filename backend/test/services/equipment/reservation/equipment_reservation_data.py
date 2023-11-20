@@ -45,7 +45,7 @@ def instantiate_global_models(time: dict[str, datetime]):
         walkin=False,
         state=ReservationState.CHECKED_IN,
         users=[user_data.user],
-        equipment=[equipment_data.vr1],
+        equipment=[equipment_data.vr2],
     )
 
     # Reservation ended early (checked out)
@@ -56,9 +56,9 @@ def instantiate_global_models(time: dict[str, datetime]):
         created_at=time[THIRTY_MINUTES_AGO],
         updated_at=time[THIRTY_MINUTES_AGO],
         walkin=False,
-        state=ReservationState.CHECKED_OUT,
+        state=ReservationState.CHECKED_IN,
         users=[user_data.ambassador],
-        equipment=[equipment_data.vr2],
+        equipment=[equipment_data.vr1],
     )
 
     # Reservation cancelled
@@ -142,6 +142,8 @@ def equipment_insert_fake_data(session: Session, time: dict[str, datetime]):
     instantiate_global_models(time)
 
     for reservation in reservations:
+        print("bruhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+        print(reservation)
         entity = ReservationEntity.from_model(reservation, session)
         session.add(entity)
 

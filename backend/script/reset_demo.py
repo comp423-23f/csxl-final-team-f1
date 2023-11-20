@@ -49,10 +49,10 @@ with Session(engine) as session:
     room_data.insert_fake_data(session)
     seat_data.insert_fake_data(session)
     reservation_data.insert_fake_data(session, time)
+    equipment_data.equipment_insert_fake_data(session)  # Ours
     equipment_reservation_data.equipment_insert_fake_data(
         session, equipment_time
     )  # Ours
-    equipment_data.equipment_insert_fake_data(session)  # Ours
 
     # Commit changes to the database
     session.commit()
