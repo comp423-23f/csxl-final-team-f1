@@ -4,8 +4,20 @@
     <!-- Container for Logo and Name to allow for left alignment -->
     <div class="left-container">
       <!-- Equipment Name -->
-      <mat-card-title class="name" [matTooltip]="equipment.name" matTooltipPosition="above">
-        {{ equipment.name }} </mat-card-title>
+      <mat-card-title
+        class="name"
+        [matTooltip]="equipment.name"
+        matTooltipPosition="above">
+        {{ equipment.name }}
+      </mat-card-title>
+      <!-- Badge to show availability -->
+      <mat-icon *ngIf="equipment.reservable" class="reservable"
+        >circle</mat-icon
+      >
+
+      <mat-icon *ngIf="!equipment.reservable" class="unreservable"
+        >circle</mat-icon
+      >
     </div>
   </mat-card-header>
 
@@ -17,7 +29,13 @@
   <mat-card-actions class="links">
     <!-- Link to Individual Equipment Page -->
     <a class="" [routerLink]="['/equipment', equipment.id]">
-      <button mat-stroked-button>Equipment</button>
+      <button
+        mat-raised-button
+        [style.background-color]="'rgb(71, 134, 198)'"
+        [disabled]="!equipment.reservable"
+        (click)="reserveEquipment()">
+        Reserve
+      </button>
     </a>
   </mat-card-actions>
 </mat-card>

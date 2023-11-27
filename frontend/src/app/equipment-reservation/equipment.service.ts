@@ -3,7 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from '../authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
-import { Equipment } from './equipment.model';
+
+export interface Equipment {
+  id: number | null;
+  name: string;
+  reservable: boolean;
+  image: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +38,8 @@ export class EquipmentReservationService {
 
   /** Returns the updated equipment object from the backend database table using the backend HTTP put request.
    * @param equipment: EquipmentSummary representing the updated equipment
+
+export { Equipment };
    * @returns {Observable<Equipment>}
    */
   updateEquipment(equipment: Equipment): Observable<Equipment> {

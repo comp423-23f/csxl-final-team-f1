@@ -27,6 +27,13 @@ mouse1 = Equipment(
     image="https://purepng.com/public/uploads/large/one-rat-p5i.png",
 )
 
+invalidTester = Equipment(
+    id=99999,
+    name="Invalid Test Equipment",
+    image="https://simonhwalkerdotcom.files.wordpress.com/2019/05/73927540-invalid-rubber-stamp-grunge-design-with-dust-scratches-effects-can-be-easily-removed-for-a-clean-cri.jpg",
+)
+
+
 equipment = [vr1, keyboard1, mouse1]
 equipment_names = [vr1.name, keyboard1.name, mouse1.name]
 

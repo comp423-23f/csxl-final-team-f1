@@ -5,6 +5,5 @@ from pydantic import BaseModel
 from .equipment import Equipment
 from ..coworking import Room
 
-
 class EquipmentDetails(Equipment, BaseModel):
     room: Room

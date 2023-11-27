@@ -1,9 +1,10 @@
 # Get Started with Development
 
 ## Prerequisites
-* [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-* [VSCode](https://code.visualstudio.com/)
-* [VSCode DevContainers Extension](https://code.visualstudio.com/docs/devcontainers/containers)
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [VSCode](https://code.visualstudio.com/)
+- [VSCode DevContainers Extension](https://code.visualstudio.com/docs/devcontainers/containers)
 
 ## Before Starting a DevContainer: Establish a .env File
 
@@ -33,26 +34,28 @@ If you see an error on your first attempt, retry once. If the error persists, do
 Once the Dev Container begins, open a terminal and complete the following:
 
 1. Install frontend dependencies:
-    1. `pushd frontend` 
-    2. `npm install`
-    3. `popd`
+   1. `pushd frontend`
+   2. `npm install`
+   3. `popd`
 2. Reload the VS Code Window to ensure plugins are properly loaded:
-    1. `Ctrl+Shift+P` to open the Command Palette
-    2. Type "Reload Window" and select the action "Developer: Reload Window"
-    3. It's unclear why this step is necessary, but it seems to fix issues with plugins initializing on first build of a DevContainer.
+   1. `Ctrl+Shift+P` to open the Command Palette
+   2. Type "Reload Window" and select the action "Developer: Reload Window"
+   3. It's unclear why this step is necessary, but it seems to fix issues with plugins initializing on first build of a DevContainer.
 3. Create database and reset demo data:
-    1. `python3 -m backend.script.create_database`
-    2. `python3 -m backend.script.reset_demo`
+   1. `python3 -m backend.script.create_database`
+   2. `python3 -m backend.script.reset_demo`
 4. Start dev server processes using the `honcho` process manager
-    1. `honcho start`
-        1. Wait until you see "frontend.1 | Compiled successfully" emitted from the Angular dev server.
-    2. Open `localhost:1560` in a browser and you should see the XL site running locally in development.
-    3. Try authorizing as Rhonda Root by visiting <http://localhost:1560/auth/as/rhonda/999999999> your browser.
-    4. To stop the development servers, press `Ctrl+C` in the terminal running `honcho` and close VSCode.
+   1. `honcho start`
+      1. Wait until you see "frontend.1 | Compiled successfully" emitted from the Angular dev server.
+   2. Open `localhost:1560` in a browser and you should see the XL site running locally in development.
+   3. Try authorizing as Rhonda Root by visiting <http://localhost:1560/auth/as/rhonda/999999999> your browser.
+   4. To stop the development servers, press `Ctrl+C` in the terminal running `honcho` and close VSCode.
 
 ## Development Data
 
 You will notice the users and roles in your system are different than the production system. This is because the `reset_demo` script creates a set of mock users and roles for development purposes. Production data, with all registered users, contains protected information and is not directly replicable in a development environment. As new features are developed, additional demo and testing data can be added to the `reset_demo` and `reset_testing` scripts, respectively.
+
+For more information on database concerns, please refer to the [Database Documentation](docs/database.md).
 
 ## Develop in Branches
 
@@ -68,6 +71,5 @@ Change users route pattern: `http://localhost:1560/auth/as/{onyen}/{pid}`
 For reference, here are some mock personas that are installed in the `reset_testing` script from above:
 
 1. Sally Student: <http://localhost:1560/auth/as/sally/111111111>
-2. Larry CADS Leader: <http://localhost:1560/auth/as/larry/555555555>
-3. Amy Ambassador: <http://localhost:1560/auth/as/amy/888888888>
-4. Rhonda Root: <http://localhost:1560/auth/as/rhonda/999999999>
+2. Amy Ambassador: <http://localhost:1560/auth/as/amy/888888888>
+3. Rhonda Root: <http://localhost:1560/auth/as/rhonda/999999999>

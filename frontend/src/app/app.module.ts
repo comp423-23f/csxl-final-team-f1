@@ -28,6 +28,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 /* Application Specific */
 import { AppRoutingModule } from './app-routing.module';
@@ -87,6 +88,7 @@ import { SharedModule } from './shared/shared.module';
     MatTabsModule,
     MatToolbarModule,
     FormsModule,
+    MatCheckboxModule,
     RouterModule,
     JwtModule.forRoot({
       config: {

@@ -7,6 +7,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatBadgeModule } from '@angular/material/badge';
 
 /* Angular Material Modules */
 import { MatTableModule } from '@angular/material/table';
@@ -31,7 +32,7 @@ import { EquipmentRoutingModule } from './equipment-routing.module';
 import { EquipmentFilterPipe } from './equipment-filter/equipment-filter.pipe';
 
 /* UI Widgets */
-import { EquipmentCard } from './widgets/equipment-card/equipment-card.widget';
+import { EquipmentCardWidget } from './widgets/equipment-card/equipment-card.widget';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 
@@ -43,11 +44,12 @@ import { SharedModule } from '../shared/shared.module';
     EquipmentFilterPipe,
 
     // UI Widgets
-    EquipmentCard
+    EquipmentCardWidget
   ],
   imports: [
     CommonModule,
     MatTabsModule,
+    MatBadgeModule,
     MatTableModule,
     MatCardModule,
     MatDialogModule,
