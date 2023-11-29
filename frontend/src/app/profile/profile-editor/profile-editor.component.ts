@@ -37,7 +37,7 @@ export class ProfileEditorComponent implements OnInit {
   ) {
     const form = this.profileForm;
     form.get('first_name')?.addValidators(Validators.required);
-    form.get('lastname')?.addValidators(Validators.required);
+    form.get('last_name')?.addValidators(Validators.required);
     form
       .get('email')
       ?.addValidators([
