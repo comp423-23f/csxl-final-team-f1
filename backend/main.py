@@ -5,7 +5,9 @@ from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
-from .api.equipment import equipment_reservation, status, ambassador  # Ours
+from .api.equipment import equipment_reservation  # Ours
+from .api.equipment import status as equipment_status  # Ours
+from .api.equipment import ambassador as equipment_ambassador  # Ours
 from .api import (
     events,
     health,
@@ -49,6 +51,8 @@ app = FastAPI(
 # Plugging in each of the router APIs
 feature_apis = [
     status,
+    equipment_status,  # Ours
+    equipment_ambassador,  # ours
     equipment_reservation,  # Ours
     reservation,
     events,

@@ -45,7 +45,7 @@ def instantiate_global_models(time: dict[str, datetime]):
         walkin=False,
         state=ReservationState.CHECKED_IN,
         users=[user_data.user],
-        equipment=[equipment_data.vr2],
+        equipment=[equipment_data.vr1],
     )
 
     # Reservation ended early (checked out)
@@ -87,6 +87,7 @@ def instantiate_global_models(time: dict[str, datetime]):
         equipment=[
             equipment_data.reservable_equipment[0],
             equipment_data.reservable_equipment[1],
+            equipment_data.reservable_equipment[2]
         ],
     )
 

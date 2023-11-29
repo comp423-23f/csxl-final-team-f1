@@ -42,7 +42,7 @@ def test_get_equipment_reservations_none(
         end=time[THIRTY_MINUTES_AGO] - ONE_MINUTE,
     )
     reservations = reservation_svc.get_equipment_reservations(
-        equipment_data.equipment, in_the_past
+        equipment_data.equipments, in_the_past
     )
     assert len(reservations) == 0
 
@@ -53,7 +53,7 @@ def test_get_equipment_reservations_active(
     """Get all reservations that are active (not cancelled or checked out)."""
     current = TimeRange(start=time[NOW], end=time[IN_THIRTY_MINUTES])
     reservations = reservation_svc.get_equipment_reservations(
-        equipment_data.equipment, current
+        equipment_data.equipments, current
     )
     assert len(reservations) == len(equipment_reservation_data.active_reservations)
     assert isinstance(reservations[0], Reservation)

@@ -40,7 +40,7 @@ def test_equipment_availability_in_past(
     """There is no equipment availability in the past."""
     past = TimeRange(start=time[THIRTY_MINUTES_AGO], end=time[NOW])
     available_equipment = reservation_svc.equipment_availability(
-        equipment_data.equipment, past
+        equipment_data.equipments, past
     )
     assert len(available_equipment) == 0
 
@@ -53,7 +53,7 @@ def test_equipment_availability_beyond_scheduled_operating_hours(
         start=time[NOW] + timedelta(days=423), end=time[NOW] + timedelta(days=424)
     )
     available_equipment = reservation_svc.equipment_availability(
-        equipment_data.equipment, out_of_bounds
+        equipment_data.equipments, out_of_bounds
     )
     assert len(available_equipment) == 0
 
@@ -67,7 +67,7 @@ def test_equipment_availability_while_closed(
         end=equipment_operating_hours_data.today.end + ONE_HOUR,
     )
     available_equipment = reservation_svc.equipment_availability(
-        equipment_data.equipment, closed
+        equipment_data.equipments, closed
     )
     assert len(available_equipment) == 0
 
@@ -82,7 +82,7 @@ def test_equipment_availability_truncate_start(
         end=time[NOW] + FIVE_MINUTES,
     )
     available_equipment = reservation_svc.equipment_availability(
-        equipment_data.equipment, recent_past_to_five_minutes
+        equipment_data.equipments, recent_past_to_five_minutes
     )
     assert len(available_equipment) == 0
 
@@ -157,6 +157,6 @@ def test_equipment_availability_xl_closing_soon(
         end=equipment_operating_hours_data.tomorrow.end,
     )
     available_equipment = reservation_svc.equipment_availability(
-        equipment_data.equipment, near_closing
+        equipment_data.equipments, near_closing
     )
     assert len(available_equipment) == 0

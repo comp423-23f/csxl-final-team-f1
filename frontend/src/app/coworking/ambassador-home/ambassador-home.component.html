@@ -1,4 +1,3 @@
-<!-- eslint-disable prettier/prettier -->
 <div *ngIf="upcomingReservations$ | async as reservations">
   <mat-card class="content" *ngIf="reservations.length > 0; else noUpcoming" appearance="outlined">
     <mat-card-header>
