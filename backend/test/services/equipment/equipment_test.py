@@ -4,6 +4,17 @@
 import pytest
 from unittest.mock import create_autospec
 
+from ....services.equipment import EquipmentService
+
+# Imported fixtures provide dependencies injected for the tests as parameters.
+from .fixtures import equipment_svc
+
+# Import the setup_teardown fixture explicitly to load entities in database
+from .equipment_data import fake_data_fixture as insert_equipment_fake_data
+
+# Import the fake model data in a namespace for test assertions
+from . import equipment_data
+
 from backend.services.equipment import EquipmentNotFoundException
 from backend.services.exceptions import UserPermissionException
 
@@ -49,11 +60,13 @@ def test_get_from_id(equipment_svc_integration: EquipmentService):
     assert isinstance(fetched_equipment, Equipment)
     assert fetched_equipment.id == vr1.id
 
+
 def test_get_from_id_error(equipment_svc_integration: EquipmentService):
     """Test that equipment with invalid ID cannot be retrieved."""
     with pytest.raises(EquipmentNotFoundException):
         fetched_equipment = equipment_svc_integration.get_from_id(99999)
         pytest.fail()
+
 
 # Test `EquipmentService.create()`
 
@@ -95,7 +108,7 @@ def test_create_equipment_as_root_repeat_id(
         equipment_svc_integration.create(user, vr1)
         pytest.fail()  # Fail test if no error was thrown above
 
-        
+
 # Test `EquipmentService.update()`
 def test_update_equipment_as_root(
     equipment_svc_integration: EquipmentService,
@@ -157,3 +170,11 @@ def test_delete_equipment_as_root_invalid_id(
     with pytest.raises(UserPermissionException):
         equipment_svc_integration.delete(user, 99999)
         pytest.fail()
+
+
+"""Tests for Equipment Service."""
+
+
+def test_list(equipment_svc: EquipmentService):
+    equipment = equipment_svc.list()
+    assert len(equipment) == len(equipment_data.equipments)

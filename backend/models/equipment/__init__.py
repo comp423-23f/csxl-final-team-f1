@@ -1,7 +1,32 @@
 from .equipment import Equipment
-from .equipment_details import EquipmentDetails
+
+from .time_range import TimeRange
+from .operating_hours import OperatingHours
+
+from .reservation import (
+    Reservation,
+    ReservationRequest,
+    ReservationState,
+    ReservationPartial,
+    ReservationIdentity,
+)
+
+from .availability_list import AvailabilityList
+from .availability import EquipmentAvailability
+
+from .status import Status
 
 __all__ = [
     "Equipment",
     "EquipmentDetails",
+    "TimeRange",
+    "OperatingHours",
+    "Reservation",
+    "ReservationState",
+    "ReservationRequest",
+    "ReservationPartial",
+    "ReservationIdentity",
+    "AvailabilityList",
+    "EquipmentAvailability",
+    "Status",
 ]

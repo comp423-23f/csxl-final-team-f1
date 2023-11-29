@@ -4,6 +4,10 @@
 from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+
+from .api.equipment import equipment_reservation  # Ours
+from .api.equipment import status as equipment_status  # Ours
+from .api.equipment import ambassador as equipment_ambassador  # Ours
 from fastapi.middleware.gzip import GZipMiddleware
 from .api import (
     events,
@@ -40,6 +44,7 @@ app = FastAPI(
         equipment.openapi_tags,
         events.openapi_tags,
         reservation.openapi_tags,
+        equipment_reservation.openapi_tags,  # Ours
         health.openapi_tags,
         admin_users.openapi_tags,
         admin_roles.openapi_tags,
@@ -52,6 +57,9 @@ app.add_middleware(GZipMiddleware)
 # Plugging in each of the router APIs
 feature_apis = [
     status,
+    equipment_status,  # Ours
+    equipment_ambassador,  # ours
+    equipment_reservation,  # Ours
     reservation,
     operating_hours,
     events,
