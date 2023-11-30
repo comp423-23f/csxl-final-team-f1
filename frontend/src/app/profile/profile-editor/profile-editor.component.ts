@@ -48,8 +48,11 @@ export class ProfileEditorComponent implements OnInit {
     form.get('pronouns')?.addValidators(Validators.required);
 
     const data = route.snapshot.data as { profile: Profile };
-    console.log(data.profile);
     this.profile = data.profile;
+    if (this.profile.signed_agreement != true) {
+      this.profile.signed_agreement = false;
+    }
+    console.log(data.profile);
   }
 
   ngOnInit(): void {
