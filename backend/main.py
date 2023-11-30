@@ -4,12 +4,14 @@
 from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-from fastapi.middleware.gzip import GZipMiddleware
+
+from .api.equipment import equipment_reservation  # Ours
+from .api.equipment import status as equipment_status  # Ours
+from .api.equipment import ambassador as equipment_ambassador  # Ours
 from .api import (
     events,
     health,
     organizations,
-    equipment,
     static_files,
     profile,
     authentication,
@@ -37,28 +39,26 @@ app = FastAPI(
         profile.openapi_tags,
         user.openapi_tags,
         organizations.openapi_tags,
-        equipment.openapi_tags,
         events.openapi_tags,
         reservation.openapi_tags,
+        equipment_reservation.openapi_tags,  # Ours
         health.openapi_tags,
         admin_users.openapi_tags,
         admin_roles.openapi_tags,
     ],
 )
 
-# Use GZip middleware for compressing HTML responses over the network
-app.add_middleware(GZipMiddleware)
-
 # Plugging in each of the router APIs
 feature_apis = [
     status,
+    equipment_status,  # Ours
+    equipment_ambassador,  # ours
+    equipment_reservation,  # Ours
     reservation,
-    operating_hours,
     events,
     user,
     profile,
     organizations,
-    equipment,
     health,
     ambassador,
     authentication,
@@ -80,9 +80,7 @@ def permission_exception_handler(request: Request, e: UserPermissionException):
 
 
 @app.exception_handler(ResourceNotFoundException)
-def resource_not_found_exception_handler(
-    request: Request, e: ResourceNotFoundException
-):
+def permission_exception_handler(request: Request, e: ResourceNotFoundException):
     return JSONResponse(status_code=404, content={"message": str(e)})
 
 

@@ -3,8 +3,9 @@
 import pytest
 from sqlalchemy.orm import Session
 from ....models.equipment import Equipment
-from ....entities.equipment_entity import EquipmentEntity
+from ....entities.equipment import EquipmentEntity
 from ..reset_table_id_seq import reset_table_id_seq
+from typing import Sequence
 
 # Sample Data Objects
 
@@ -25,7 +26,7 @@ vr2 = Equipment(
 vr3 = Equipment(
     id=3,
     name="VR Headset 3",
-    reservable=False,
+    reservable=True,
     image="https://s7d1.scene7.com/is/image/dmqualcommprod/meta-quest-3-4?$QC_Responsive$&fmt=png-alpha",
 )
 
@@ -37,9 +38,9 @@ vr4 = Equipment(
 )
 
 keyboard1 = Equipment(
-    id=5,
+    id=202,
     name="Keyboard 1",
-    reservable=False,
+    reservable=True,
     image="https://pngimg.com/uploads/keyboard/keyboard_PNG101845.png",
 )
 
@@ -74,7 +75,7 @@ mouse1 = Equipment(
 mouse2 = Equipment(
     id=10,
     name="Mouse 2",
-    reservable=False,
+    reservable=True,
     image="https://purepng.com/public/uploads/large/one-rat-p5i.png",
 )
 
@@ -92,19 +93,34 @@ mouse4 = Equipment(
     image="https://purepng.com/public/uploads/large/one-rat-p5i.png",
 )
 
-equipment = [
-    vr1,
-    vr2,
-    vr3,
-    vr4,
-    keyboard1,
-    keyboard2,
-    keyboard3,
-    keyboard4,
-    mouse1,
-    mouse2,
-    mouse3,
-    mouse4,
+# equipment = [
+#     vr1,
+#     vr2,
+#     vr3,
+#     vr4,
+#     keyboard1,
+#     keyboard2,
+#     keyboard3,
+#     keyboard4,
+#     mouse1,
+#     mouse2,
+#     mouse3,
+#     mouse4,
+# ]
+
+
+mouses = [mouse1, mouse2]
+
+keyboards = [keyboard1, keyboard2, keyboard3, keyboard4]
+
+vr_headsets = [vr1, vr2, vr3, vr4]
+
+equipment: Sequence[Equipment] = vr_headsets + keyboards + mouses
+
+reservable_equipment = [equipment for equipment in equipment if equipment.reservable]
+
+unreservable_equipment = [
+    equipment for equipment in equipment if not equipment.reservable
 ]
 
 # Data Functions
@@ -139,3 +155,26 @@ def fake_data_fixture(session: Session):
     insert_fake_data(session)
     session.commit()
     yield
+
+
+"""Equipment data for tests."""
+
+# from ..reset_table_id_seq import reset_table_id_seq
+
+# def equipment_insert_fake_data(session: Session):
+#     for x in equipments:
+#         entity = EquipmentEntity.from_model(x)
+#         session.add(entity)
+#     reset_table_id_seq(
+#         session, EquipmentEntity, EquipmentEntity.id, len(equipments) + 1
+#     )
+
+
+# @pytest.fixture(autouse=True)
+# def fake_data_fixture(session: Session):
+#     equipment_insert_fake_data(session)
+#     session.commit()
+
+
+# def delete_all(session: Session):
+#     session.execute(delete(EquipmentEntity))

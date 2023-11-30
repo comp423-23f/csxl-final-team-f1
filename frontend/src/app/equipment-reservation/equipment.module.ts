@@ -36,6 +36,8 @@ import { EquipmentCardWidget } from './widgets/equipment-card/equipment-card.wid
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 
+console.log('EquipmentReservationModule is being called');
+
 @NgModule({
   declarations: [
     EquipmentPageComponent,
@@ -70,3 +72,5 @@ import { SharedModule } from '../shared/shared.module';
   ]
 })
 export class EquipmentReservationModule {}
+
+console.log('EquipmentReservationModule is exported');

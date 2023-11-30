@@ -20,7 +20,7 @@ from .permission_entity import PermissionEntity
 from .user_role_table import user_role_table
 from .organization_entity import OrganizationEntity
 from .event_entity import EventEntity
-from .equipment_entity import EquipmentEntity
+from .equipment.equipment_entity import EquipmentEntity
 
 
 __authors__ = ["Kris Jordan"]

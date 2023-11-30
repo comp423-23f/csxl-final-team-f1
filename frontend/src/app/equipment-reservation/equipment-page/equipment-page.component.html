@@ -7,11 +7,7 @@
   <!-- Equipment -->
   <div class="equipment-cards">
     <!-- Display card for each equipment, potentially filtered based on the search query. -->
-    <equipment-card
-      class="card"
-      [equipment]="equipment"
-      [profile]="profile"
-      [profilePermissions]="permValues"
+    <equipment-card class="card" [equipment]="equipment" [profile]="profile" [profilePermissions]="permValues"
       *ngFor="let equipment of equipment | equipmentFilter: searchBarQuery" />
   </div>
 </div>

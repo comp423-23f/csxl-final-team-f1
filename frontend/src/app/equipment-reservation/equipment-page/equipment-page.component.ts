@@ -42,6 +42,7 @@ export class EquipmentPageComponent {
     private route: ActivatedRoute,
     protected snackBar: MatSnackBar
   ) {
+    console.log('EquipmentPageComponent is being built');
     /** Initialize data from resolvers. */
     const data = this.route.snapshot.data as {
       profile: Profile;

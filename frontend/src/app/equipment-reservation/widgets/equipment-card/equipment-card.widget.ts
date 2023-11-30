@@ -36,10 +36,8 @@ import { ActivatedRoute, Route } from '@angular/router';
 import { isAuthenticated } from 'src/app/gate/gate.guard';
 import { equipmentResolver } from '../../equipment.resolver';
 import { Profile } from '/workspace/frontend/src/app/profile/profile.service';
-import {
-  Equipment,
-  EquipmentReservationService
-} from '../../equipment.service';
+import { EquipmentReservationService } from '../../equipment.service';
+import { Equipment } from '../../equipment.model';
 
 @Component({
   selector: 'equipment-card',
