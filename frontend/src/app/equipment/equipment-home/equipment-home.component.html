@@ -1,0 +1,29 @@
+<div class="equipment-reservations-grid">
+  <ng-container *ngIf="status$ | async as status">
+    <ng-container
+      *ngIf="openOperatingHours$ | async as openOperatingHours; else closed">
+      <equipment-operating-hours-panel
+        [operatingHours]="status.operating_hours"
+        [openOperatingHours]="openOperatingHours" />
+
+      <ng-container
+        *ngIf="activeReservation$ | async as activeReservation; else dropin">
+        <equipment-reservation-card
+          [reservation]="activeReservation"></equipment-reservation-card>
+      </ng-container>
+
+      <ng-template #dropin>
+        <div class="dropin-card-container">
+          <equipment-dropin-availability-card
+            [equipment_availability]="status.equipment_availability"
+            (equipmentSelected)="reserve($event)" />
+        </div>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #closed>
+      <equipment-operating-hours-panel
+        [operatingHours]="status.operating_hours" />
+    </ng-template>
+  </ng-container>
+</div>
