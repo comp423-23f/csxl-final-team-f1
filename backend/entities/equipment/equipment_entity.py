@@ -16,6 +16,9 @@ class EquipmentEntity(EntityBase):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String)
     reservable: Mapped[bool] = mapped_column(Boolean)
+    is_keyboard: Mapped[bool] = mapped_column(Boolean)
+    is_mouse: Mapped[bool] = mapped_column(Boolean)
+    is_vr: Mapped[bool] = mapped_column(Boolean)
 
     # registrations: Mapped[list["EquipmentReservationEntity"]] = relationship(
     #     back_populates="equipment", cascade="all,delete"
@@ -30,6 +33,9 @@ class EquipmentEntity(EntityBase):
             id=self.id,
             name=self.name,
             reservable=self.reservable,
+            is_keyboard=self.is_keyboard,
+            is_mouse=self.is_mouse,
+            is_vr=self.is_vr,
         )
 
     @classmethod
@@ -57,4 +63,7 @@ class EquipmentEntity(EntityBase):
             id=model.id,
             name=model.name,
             reservable=model.reservable,
+            is_keyboard=model.is_keyboard,
+            is_mouse=model.is_mouse,
+            is_vr=model.is_vr,
         )

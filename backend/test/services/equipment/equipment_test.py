@@ -14,4 +14,4 @@ from . import equipment_data
 
 def test_list(equipment_svc: EquipmentService):
     equipment = equipment_svc.list()
-    assert len(equipment) == len(equipment_data.equipment)
+    assert len(equipment) == len(equipment_data.equipments)

@@ -11,6 +11,9 @@ class Equipment(EquipmentIdentity, BaseModel):
     id: int
     name: str
     reservable: bool
+    is_keyboard: bool
+    is_mouse: bool
+    is_vr: bool
 
 
 class NewEquipment(Equipment, BaseModel):

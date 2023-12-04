@@ -69,9 +69,9 @@ class EquipmentCategory {
   }
 }
 
-const SITTING_BENCH = 0;
-const STANDING_BENCH = 1;
-const COLLAB_AREA = 2;
+const KEYBOARD = 0;
+const MOUSE = 1;
+const VR = 2;
 
 @Component({
   selector: 'equipment-dropin-availability-card',
@@ -94,7 +94,13 @@ export class EquipmentDropInCard implements OnChanges {
       changes['equipment_availability'].currentValue;
     this.categories = this.initCategories();
     for (let equipment of this.equipment_availability) {
-      this.categories[COLLAB_AREA].push(equipment);
+      if (equipment.is_keyboard) {
+        this.categories[KEYBOARD].push(equipment);
+      } else if (equipment.is_mouse) {
+        this.categories[MOUSE].push(equipment);
+      } else {
+        this.categories[VR].push(equipment);
+      }
     }
   }
 
@@ -107,9 +113,9 @@ export class EquipmentDropInCard implements OnChanges {
 
   private initCategories(): EquipmentCategory[] {
     return [
-      new EquipmentCategory('Sitting Desk with Monitor'),
-      new EquipmentCategory('Standing Desk with Monitor'),
-      new EquipmentCategory('Communal Area Equipment')
+      new EquipmentCategory('Keyboards'),
+      new EquipmentCategory('Mouses'),
+      new EquipmentCategory('VR Headsets')
     ];
   }
 }

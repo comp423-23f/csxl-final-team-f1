@@ -14,38 +14,74 @@ vr1 = Equipment(
     id=1,
     name="VR Headset 1",
     reservable=True,
+    is_keyboard=False,
+    is_mouse=False,
+    is_vr=True,
 )
 
 vr2: Equipment = Equipment(
     id=2,
     name="VR Headset 2",
     reservable=False,
+    is_keyboard=False,
+    is_mouse=False,
+    is_vr=True,
 )
 
 vr3 = Equipment(
     id=3,
     name="VR Headset 3",
     reservable=True,
+    is_keyboard=False,
+    is_mouse=False,
+    is_vr=True,
 )
 
 vr4 = Equipment(
     id=4,
     name="VR Headset 4",
     reservable=False,
+    is_keyboard=False,
+    is_mouse=False,
+    is_vr=True,
 )
 
-keyboard1 = Equipment(id=20, name="Keyboard 1", reservable=False)
+keyboard1 = Equipment(
+    id=20,
+    name="Keyboard 1",
+    reservable=False,
+    is_keyboard=True,
+    is_mouse=False,
+    is_vr=False,
+)
 
-keyboard2 = Equipment(id=21, name="Keyboard 2", reservable=False)
+keyboard2 = Equipment(
+    id=21,
+    name="Keyboard 2",
+    reservable=False,
+    is_keyboard=True,
+    is_mouse=False,
+    is_vr=False,
+)
 
 keyboards = [keyboard1, keyboard2]
 
-mouse1 = Equipment(id=40, name="Mouse 1", reservable=True)
+mouse1 = Equipment(
+    id=40,
+    name="Mouse 1",
+    reservable=True,
+    is_keyboard=False,
+    is_mouse=True,
+    is_vr=False,
+)
 
 mouse2 = Equipment(
     id=41,
     name="Mouse 2",
     reservable=False,
+    is_keyboard=False,
+    is_mouse=True,
+    is_vr=False,
 )
 
 mouses = [mouse1, mouse2]

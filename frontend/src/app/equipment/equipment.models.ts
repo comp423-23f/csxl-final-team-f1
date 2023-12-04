@@ -35,6 +35,9 @@ export interface Equipment {
   id: number;
   name: string;
   reservable: boolean;
+  is_keyboard: boolean;
+  is_mouse: boolean;
+  is_vr: boolean;
 }
 
 export interface ReservationJSON extends TimeRangeJSON {
