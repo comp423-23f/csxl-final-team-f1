@@ -21,6 +21,7 @@ export interface Profile {
   github_id: number | null;
   github_avatar: string | null;
   registered: boolean;
+  signed_agreement: boolean | null;
   role: number;
   permissions: Permission[];
 }

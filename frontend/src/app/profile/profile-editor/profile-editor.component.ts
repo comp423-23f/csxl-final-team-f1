@@ -49,6 +49,10 @@ export class ProfileEditorComponent implements OnInit {
 
     const data = route.snapshot.data as { profile: Profile };
     this.profile = data.profile;
+    if (this.profile.signed_agreement != true) {
+      this.profile.signed_agreement = false;
+    }
+    console.log(data.profile);
   }
 
   ngOnInit(): void {
@@ -70,6 +74,14 @@ export class ProfileEditorComponent implements OnInit {
         error: (err) => this.onError(err)
       });
     }
+  }
+
+  agreeToTerms(): void {
+    this.profile.signed_agreement = true;
+    this.profileService.put(this.profile).subscribe({
+      next: (user) => this.onSuccess(user),
+      error: (err) => this.onError(err)
+    });
   }
 
   private onSuccess(profile: Profile) {
