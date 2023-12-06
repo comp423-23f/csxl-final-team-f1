@@ -48,6 +48,7 @@ export class ProfileEditorComponent implements OnInit {
     form.get('pronouns')?.addValidators(Validators.required);
 
     const data = route.snapshot.data as { profile: Profile };
+    console.log(data.profile);
     this.profile = data.profile;
     if (this.profile.signed_agreement != true) {
       this.profile.signed_agreement = false;
@@ -103,4 +104,14 @@ export class ProfileEditorComponent implements OnInit {
       next: () => (this.profile.github = '')
     });
   }
+
+  //   agreeToTerms(event: any) {
+  //     // Your logic when the checkbox state changes
+  //     if (event.checked) {
+  //       console.log('Checkbox is checked');
+  //     } else {
+  //       console.log('Checkbox is unchecked');
+  //       // Handle the unchecked state if needed
+  //     }
+  //   }
 }
