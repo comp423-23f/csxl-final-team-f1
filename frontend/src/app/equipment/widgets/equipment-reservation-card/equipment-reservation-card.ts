@@ -1,8 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Reservation } from '../../equipment.models';
 import { Observable, map, mergeMap, timer } from 'rxjs';
+import { ActivatedRoute, Route } from '@angular/router';
+import { isAuthenticated } from 'src/app/gate/gate.guard';
 import { Router } from '@angular/router';
 import { ReservationService } from '../../reservation/reservation.service';
+import { profileResolver } from '../../../profile/profile.resolver';
+import { Profile, ProfileService } from '../../../profile/profile.service';
 
 @Component({
   selector: 'equipment-reservation-card',
@@ -10,14 +14,30 @@ import { ReservationService } from '../../reservation/reservation.service';
   styleUrls: ['./equipment-reservation-card.css']
 })
 export class EquipmentReservationCard implements OnInit {
+  public static Route: Route = {
+    path: 'profile',
+    title: 'Profile',
+    canActivate: [isAuthenticated],
+    resolve: { profile: profileResolver }
+  };
+
+  public profile: Profile;
+
   @Input() reservation!: Reservation;
+
+  public liabilityMessage: Boolean;
 
   public draftConfirmationDeadline$!: Observable<string>;
 
   constructor(
+    route: ActivatedRoute,
     public router: Router,
     public reservationService: ReservationService
-  ) {}
+  ) {
+    const data = route.snapshot.data as { profile: Profile };
+    this.profile = data.profile;
+    this.liabilityMessage = false;
+  }
 
   ngOnInit(): void {
     this.draftConfirmationDeadline$ = this.initDraftConfirmationDeadline();
@@ -32,7 +52,11 @@ export class EquipmentReservationCard implements OnInit {
   }
 
   confirm() {
-    this.reservationService.confirm(this.reservation).subscribe();
+    if (this.profile.signed_agreement != true) {
+      this.liabilityMessage = true;
+    } else {
+      this.reservationService.confirm(this.reservation).subscribe();
+    }
   }
 
   checkout() {
