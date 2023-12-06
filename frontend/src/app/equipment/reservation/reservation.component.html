@@ -1,0 +1,8 @@
+<!-- eslint-disable prettier/prettier -->
+<div class="card-container">
+    <ng-container *ngIf="reservation$ | async as reservation">
+      <equipment-reservation-card
+        [reservation]="reservation"></equipment-reservation-card>
+    </ng-container>
+</div>
+  

@@ -46,6 +46,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
       'coworking.reservation.*',
       '*'
     );
+    this.ambassadorPermission$ = this.permission.check(
+      'equipment.reservation.*',
+      '*'
+    );
   }
 
   ngOnInit(): void {

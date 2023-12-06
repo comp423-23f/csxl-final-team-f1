@@ -5,6 +5,10 @@ import { AppTitleStrategy } from './app-title.strategy';
 import { GateComponent } from './gate/gate.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileEditorComponent } from './profile/profile-editor/profile-editor.component';
+import { CoworkingPageComponent } from './coworking/coworking-home/coworking-home.component';
+import { EquipmentPageComponent } from './equipment/equipment-home/equipment-home.component'; //Ours
+import { AmbassadorPageComponent } from './coworking/ambassador-home/ambassador-home.component';
+import { EquipmentAmbassadorPageComponent } from './equipment/ambassador-home/ambassador-home.component'; // Ours
 import { AboutComponent } from './about/about.component';
 import { EquipmentPageComponent } from './equipment-reservation/equipment-page/equipment-page.component';
 
@@ -13,7 +17,10 @@ const routes: Routes = [
   AboutComponent.Route,
   ProfileEditorComponent.Route,
   GateComponent.Route,
-  EquipmentPageComponent.Route,
+  CoworkingPageComponent.Route,
+  AmbassadorPageComponent.Route,
+  EquipmentPageComponent.Route, //Ours
+  EquipmentAmbassadorPageComponent.Route, //Ours
   {
     path: 'coworking',
     title: 'Cowork in the XL',
@@ -41,12 +48,10 @@ const routes: Routes = [
       import('./event/event.module').then((m) => m.EventModule)
   },
   {
-    path: 'equipment-reservation',
+    path: 'equipment', //Ours
     title: 'Equipment Reservation',
     loadChildren: () =>
-      import('./equipment-reservation/equipment.module').then(
-        (m) => m.EquipmentReservationModule
-      )
+      import('./equipment/equipment.module').then((m) => m.EquipmentModule)
   }
 ];
 

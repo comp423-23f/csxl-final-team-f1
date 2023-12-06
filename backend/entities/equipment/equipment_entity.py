@@ -1,72 +1,69 @@
-"""Definition of SQLAlchemy table-backed object mapping entity for Organizations."""
+"""Entity for Equipment."""
 
 from sqlalchemy import Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship, Session, joinedload
 from ..entity_base import EntityBase
-from ...models.equipment import EquipmentDetails
 from ...models.equipment.equipment import EquipmentIdentity, Equipment
 from typing import Self
 
 
 class EquipmentEntity(EntityBase):
-    """Entity for Seats under XL management."""
+    """Entity for Equipment under XL management."""
 
-    __tablename__ = "equipment"
+    __tablename__ = "equipment__equipment"
 
-    # Unique ID for the equipment
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    # Name of the equipment
-    name: Mapped[str] = mapped_column(String, nullable=False, default="")
-    # Image of the equipment
-    image: Mapped[str] = mapped_column(String)
-    # Short description of the equipment
-    description: Mapped[str] = mapped_column(String)
-    # Whether the equipment can be reserved by anyone or not
-    reservable: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
-    # x: Mapped[int] = mapped_column(Integer)
-    # y: Mapped[int] = mapped_column(Integer)
-    # # EquipmentDetails Model Fields Follow
-    # room_id: Mapped[str] = mapped_column(String, ForeignKey("coworking__room.id"))
+    # Equipment Model Fields
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String)
+    reservable: Mapped[bool] = mapped_column(Boolean)
+    is_keyboard: Mapped[bool] = mapped_column(Boolean)
+    is_mouse: Mapped[bool] = mapped_column(Boolean)
+    is_vr: Mapped[bool] = mapped_column(Boolean)
 
-    room: Mapped["RoomEntity"] = relationship("RoomEntity", back_populates="seats")  # type: ignore
+    # registrations: Mapped[list["EquipmentReservationEntity"]] = relationship(
+    #     back_populates="equipment", cascade="all,delete"
+    # )
 
-    def to_model(self) -> EquipmentDetails:
+    def to_model(self) -> Equipment:
         """Converts the entity to a model.
 
         Returns:
-            Seat: The model representation of the entity."""
-        return EquipmentDetails(
+            equipment: The model representation of the entity."""
+        return Equipment(
             id=self.id,
             name=self.name,
-            image=self.image,
             reservable=self.reservable,
-            description=self.description,
-            # x=self.x,
-            # y=self.y,
-            room=self.room.to_model(),
+            is_keyboard=self.is_keyboard,
+            is_mouse=self.is_mouse,
+            is_vr=self.is_vr,
         )
 
     @classmethod
     def get_models_from_identities(
         cls, session: Session, identities: list[EquipmentIdentity]
     ) -> list[Equipment]:
-        equipment_ids = [equipment.id for equipment in identities]
-        entities = session.query(cls).filter(cls.id.in_(equipment_ids)).all()
+        equipment_ids = [x.id for x in identities]
+        entities = (
+            session.query(cls).filter(cls.id.in_(equipment_ids))
+            # .options(joinedload(EquipmentEntity.room))
+            .all()
+        )
         return [entity.to_model() for entity in entities]
 
     @classmethod
-    def from_model(cls, model: EquipmentDetails) -> Self:
-        """Create an SeEntity from a Seat model.
+    def from_model(cls, model: Equipment) -> Self:
+        """Create an EquipmentEntity from a Equipment model.
 
         Args:
-            model (Seat): The model to create the entity from.
+            model (Equipment): The model to create the entity from.
 
         Returns:
             Self: The entity (not yet persisted)."""
         return cls(
             id=model.id,
             name=model.name,
-            description=model.description,
             reservable=model.reservable,
-            image=model.image,
+            is_keyboard=model.is_keyboard,
+            is_mouse=model.is_mouse,
+            is_vr=model.is_vr,
         )

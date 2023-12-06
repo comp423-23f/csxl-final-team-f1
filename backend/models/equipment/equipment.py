@@ -1,4 +1,4 @@
-"""Equipment models a piece of reservable equipment."""
+"""Equipment models a physical working space in the equipment space."""
 
 from pydantic import BaseModel
 
@@ -11,7 +11,9 @@ class Equipment(EquipmentIdentity, BaseModel):
     id: int
     name: str
     reservable: bool
-    image: str
+    is_keyboard: bool
+    is_mouse: bool
+    is_vr: bool
 
 
 class NewEquipment(Equipment, BaseModel):

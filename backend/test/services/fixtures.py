@@ -10,7 +10,7 @@ from ...services import (
     OrganizationService,
     EventService,
 )
-from ...services.equipment import EquipmentService
+from ...services.equipment.equipment import EquipmentService
 
 __authors__ = ["Kris Jordan", "Ajay Gandecha"]
 __copyright__ = "Copyright 2023"
