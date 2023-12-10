@@ -6,11 +6,10 @@ import { GateComponent } from './gate/gate.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileEditorComponent } from './profile/profile-editor/profile-editor.component';
 import { CoworkingPageComponent } from './coworking/coworking-home/coworking-home.component';
-import { EquipmentPageComponent } from './equipment/equipment-home/equipment-home.component'; //Ours
 import { AmbassadorPageComponent } from './coworking/ambassador-home/ambassador-home.component';
 import { EquipmentAmbassadorPageComponent } from './equipment/ambassador-home/ambassador-home.component'; // Ours
 import { AboutComponent } from './about/about.component';
-import { EquipmentPageComponent } from './equipment-reservation/equipment-page/equipment-page.component';
+import { EquipmentPageComponent } from './equipment/equipment-home/equipment-home.component';
 
 const routes: Routes = [
   HomeComponent.Route,
