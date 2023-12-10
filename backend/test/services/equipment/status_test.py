@@ -37,6 +37,9 @@ def test_status_dispatch(status_svc: StatusService):
             availability=[],
             name="S1",
             reservable=True,
+            is_keyboard=True,
+            is_mouse=False,
+            is_vr=False,
         )
     ]
     status_svc._reservation_svc.equipment_availability.return_value = (
